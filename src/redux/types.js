@@ -1,4 +1,6 @@
 export default {
 
-    LOGIN:'LOGIN'
+    LOGIN:'LOGIN',
+    ADD_LIST : 'ADD',
+
 }

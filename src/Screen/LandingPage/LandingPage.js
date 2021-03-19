@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, Image } from "react-native";
+import { Text, View, Image,StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import imagePath from "../../constants/imagePath";
 import navigationStrings from "../../constants/navigationStrings";
@@ -14,92 +14,53 @@ export default class Login extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={styles.container}>
         <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: 180,
-          }}
+          style={styles.logoView}
         >
           <Image
-            style={{ height: 80, width: 100 }}
+            style={styles.logoimage}
             source={imagePath.myntra}
           />
           <Text
-            style={{
-              fontSize: 15,
-              color: "grey",
-              fontFamily: "serif",
-              marginTop: 50,
-            }}
+            style={styles.easyUsingText}
           >
             EASY USING
           </Text>
-          <View style={{ flexDirection: "row", marginTop: 15 }}>
+          <View style={styles.socialIconView}>
             <TouchableOpacity>
               <View
-                style={{
-                  flexDirection: "row",
-                  borderWidth: 1,
-                  padding: 15,
-                  borderColor: "grey",
-                  borderRadius: 5,
-                  marginRight: 20,
-                  width: 130,
-                }}
+                style={styles.facebookView}
               >
                 <Image
-                  style={{ height: 20, width: 20, marginRight: 10 }}
-                  source={{
-                    uri:
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKKgI9pF1hBouy0Xt5sm16Or0Y7uSEFGoiEQ&usqp=CAU",
-                  }}
+                  style={styles.fbImage}
+                  source={imagePath.facebookImage}
                 />
                 <Text>FACEBOOK</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity>
               <View
-                style={{
-                  flexDirection: "row",
-                  borderWidth: 1,
-                  padding: 15,
-                  borderColor: "grey",
-                  borderRadius: 5,
-                  width: 130,
-                }}
+                style={styles.googleImageView}
               >
                 <Image
-                  style={{ height: 20, width: 20, marginRight: 10 }}
-                  source={{
-                    uri:
-                      "https://o.remove.bg/downloads/ab6f9ced-198c-4357-9158-9e374c8690de/google-new-logo-1030x541-removebg-preview.png",
-                  }}
+                  style={styles.gImage}
+                  source={imagePath.googleImage}
                 />
                 <Text>GOOGLE</Text>
               </View>
             </TouchableOpacity>
           </View>
 
-          <View style={{ flexDirection: "row", marginTop: 45 }}>
+          <View style={styles.btnView}>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate("login")}
             >
               <View
-                style={{
-                  flexDirection: "row",
-                  padding: 15,
-                  borderRadius: 5,
-                  marginRight: 20,
-                  width: 130,
-                  backgroundColor: "#e0436c",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
+                style={styles.loginBtnView}
               >
                 <Text
-                  style={{ fontWeight: "bold", fontSize: 15, color: "white" }}
+                  style={styles.loginText}
                 >
                   Login
                 </Text>
@@ -109,18 +70,10 @@ export default class Login extends Component {
               onPress={() => this.props.navigation.navigate("signup")}
             >
               <View
-                style={{
-                  flexDirection: "row",
-                  padding: 15,
-                  borderRadius: 5,
-                  width: 130,
-                  backgroundColor: "#e0436c",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
+                style={styles.signupBtnView}
               >
                 <Text
-                  style={{ fontWeight: "bold", fontSize: 15, color: "white" }}
+                  style={styles.loginText}
                 >
                   Signup
                 </Text>
@@ -133,3 +86,63 @@ export default class Login extends Component {
     );
   }
 }
+const styles = StyleSheet.create({
+container:{ flex: 1 },
+logoView:{
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: 180,
+},
+logoimage:{ height: 100, width: 100 },
+easyUsingText:{
+  fontSize: 15,
+  color: "grey",
+  fontFamily: "serif",
+  marginTop: 30,
+},
+socialIconView:{ flexDirection: "row", marginTop: 15 },
+facebookView:{
+  flexDirection: "row",
+  borderWidth: 1,
+  padding: 10,
+  borderColor: "grey",
+  borderRadius: 5,
+  marginRight: 20,
+  width: 130,
+  justifyContent:"center",
+  alignItems:"center"
+},
+fbImage:{ height: 30, width: 20, marginRight: 10 },
+googleImageView:{
+  flexDirection: "row",
+  borderWidth: 1,
+  padding: 10,
+  borderColor: "grey",
+  borderRadius: 5,
+  width: 130,
+  alignItems:"center"
+},
+gImage:{ height: 30, width: 30, marginRight: 10 },
+btnView:{ flexDirection: "row", marginTop: 45 },
+loginBtnView:{
+  flexDirection: "row",
+  padding: 15,
+  borderRadius: 5,
+  marginRight: 20,
+  width: 130,
+  backgroundColor: "#e0436c",
+  justifyContent: "center",
+  alignItems: "center",
+},
+loginText:{ fontWeight: "bold", fontSize: 15, color: "white" },
+signupBtnView:{
+  flexDirection: "row",
+  padding: 15,
+  borderRadius: 5,
+  width: 130,
+  backgroundColor: "#e0436c",
+  justifyContent: "center",
+  alignItems: "center",
+},
+
+})

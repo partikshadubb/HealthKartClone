@@ -8,6 +8,7 @@ import {
 import DetailPage from "../DetailPage/DetailPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeStyle from "../../Component/HomeStyle";
+import imagePath from "../../constants/imagePath";
 
 export default class HomePage extends Component {
   constructor() {
@@ -321,20 +322,21 @@ if (itemBool) {
   render() {
     const { shoeList, name, image, counter ,addCartArray} = this.state;
     return (
-      <View style={{ flex: 1, marginTop: 30 }}>
+      <View style={{ flex: 1, }}>
         <View
           style={{
             flexDirection: "row",
             position: "relative",
             flexWrap: "wrap",
-            justifyContent: "space-between",
+            // justifyContent: "space-between",
             backgroundColor: "white",
             alignItems: "center",
             height: 40,
-            paddingTop: 5,
+            alignItems:"center"
+            // paddingTop: 5,
           }}
         >
-          <View
+          {/* <View
             style={{
               flexDirection: "row",
               justifyContent: "center",
@@ -352,7 +354,7 @@ if (itemBool) {
                     "https://o.remove.bg/downloads/407dcca4-c4a6-48fb-8700-f21ef9e50596/kisspng-computer-icons-hamburger-button-menu-new-menu-5b34724be5a1f0.5796308115301637879406-removebg-preview.png",
                 }}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity>
               <Image
                 style={{ height: 30, width: 50 }}
@@ -362,30 +364,20 @@ if (itemBool) {
                 }}
               />
             </TouchableOpacity>
-          </View>
+         
           <View
             style={{
               flexDirection: "row",
-              marginRight: 15,
+              
               alignItems: "center",
             }}
           >
+            
+            
             <TouchableOpacity>
               <Image
-                style={{ height: 20, width: 20, marginRight: 15 }}
-                source={{
-                  uri:
-                    "https://o.remove.bg/downloads/dc6f76d6-7742-4748-899d-888d429c59ee/871-8719667_download-png-transparent-background-search-icon-removebg-preview.png",
-                }}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Image
-                style={{ height: 21, width: 20, marginRight: 15 }}
-                source={{
-                  uri:
-                    "https://o.remove.bg/downloads/af51ea7a-8061-468d-be3d-306b4e38c7fd/img_316859-removebg-preview.png",
-                }}
+                style={{ height: 50, width: 50, marginRight: 15 }}
+                source={imagePath.myntra}
               />
             </TouchableOpacity>
             <TouchableOpacity>
@@ -399,119 +391,14 @@ if (itemBool) {
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>this.props.navigation.navigate('Cart', {itemList:addCartArray })}>
               <Image
-                style={{ height: 20, width: 20 }}
-                source={{
-                  uri:
-                    "https://o.remove.bg/downloads/2a835397-97f1-437f-8df6-cfa6da886457/images-removebg-preview.png",
-                }}
+                style={{ height: 20, width: 20 ,marginLeft:175}}
+                source={imagePath.cart}
               />
             </TouchableOpacity>
           </View>
         </View>
 
-        <View style={{ flexDirection: "row" }}>
-          <ScrollView
-            horizontal={true}
-            style={{ backgroundColor: "white", paddingTop: 10 }}
-          >
-            <Image
-              style={{ height: 90, width: 80 }}
-              source={{
-                uri:
-                  "https://o.remove.bg/downloads/a082849f-36cd-4122-8d74-4972f2870940/c389654b-c815-4183-8d6c-abbe8c93092d1614246275190-Sports-Shoe-removebg-preview.png",
-              }}
-            />
-
-            <Image
-              style={{ height: 90, width: 80 }}
-              source={{
-                uri:
-                  "https://o.remove.bg/downloads/218b2014-823e-4138-b24d-112528ba1b2c/bc99c4a0-d867-473b-b08e-8868e5c733c61614246275062-Flipflop-removebg-preview.png",
-              }}
-            />
-
-            <Image
-              style={{ height: 90, width: 80 }}
-              source={{
-                uri:
-                  "https://o.remove.bg/downloads/5188169f-926f-4621-aa52-f669af42f516/bcf3b388-2d3a-404b-b22b-a0e9b177c8551614246275048-Casual-Shoe-removebg-preview.png",
-              }}
-            />
-
-            <Image
-              style={{ height: 90, width: 80 }}
-              source={{
-                uri:
-                  "https://o.remove.bg/downloads/840b56da-49c7-43d6-96c5-b2b1f6dd19e9/925a7ce7-63c6-4ece-936c-962e06677d8a1614247155295-Flat-_-heels-removebg-preview.png",
-              }}
-            />
-
-            <Image
-              style={{ height: 90, width: 80 }}
-              source={{
-                uri:
-                  "https://o.remove.bg/downloads/a082849f-36cd-4122-8d74-4972f2870940/c389654b-c815-4183-8d6c-abbe8c93092d1614246275190-Sports-Shoe-removebg-preview.png",
-              }}
-            />
-
-            <Image
-              style={{ height: 90, width: 80 }}
-              source={{
-                uri:
-                  "https://o.remove.bg/downloads/218b2014-823e-4138-b24d-112528ba1b2c/bc99c4a0-d867-473b-b08e-8868e5c733c61614246275062-Flipflop-removebg-preview.png",
-              }}
-            />
-
-            <Image
-              style={{ height: 90, width: 80 }}
-              source={{
-                uri:
-                  "https://o.remove.bg/downloads/5188169f-926f-4621-aa52-f669af42f516/bcf3b388-2d3a-404b-b22b-a0e9b177c8551614246275048-Casual-Shoe-removebg-preview.png",
-              }}
-            />
-
-            <Image
-              style={{ height: 90, width: 80 }}
-              source={{
-                uri:
-                  "https://o.remove.bg/downloads/840b56da-49c7-43d6-96c5-b2b1f6dd19e9/925a7ce7-63c6-4ece-936c-962e06677d8a1614247155295-Flat-_-heels-removebg-preview.png",
-              }}
-            />
-
-            <Image
-              style={{ height: 90, width: 80 }}
-              source={{
-                uri:
-                  "https://o.remove.bg/downloads/a082849f-36cd-4122-8d74-4972f2870940/c389654b-c815-4183-8d6c-abbe8c93092d1614246275190-Sports-Shoe-removebg-preview.png",
-              }}
-            />
-
-            <Image
-              style={{ height: 90, width: 80 }}
-              source={{
-                uri:
-                  "https://o.remove.bg/downloads/218b2014-823e-4138-b24d-112528ba1b2c/bc99c4a0-d867-473b-b08e-8868e5c733c61614246275062-Flipflop-removebg-preview.png",
-              }}
-            />
-
-            <Image
-              style={{ height: 90, width: 80 }}
-              source={{
-                uri:
-                  "https://o.remove.bg/downloads/5188169f-926f-4621-aa52-f669af42f516/bcf3b388-2d3a-404b-b22b-a0e9b177c8551614246275048-Casual-Shoe-removebg-preview.png",
-              }}
-            />
-
-            <Image
-              style={{ height: 90, width: 80 }}
-              source={{
-                uri:
-                  "https://o.remove.bg/downloads/840b56da-49c7-43d6-96c5-b2b1f6dd19e9/925a7ce7-63c6-4ece-936c-962e06677d8a1614247155295-Flat-_-heels-removebg-preview.png",
-              }}
-            />
-          </ScrollView>
-        </View>
-
+       
         <View style={{ flex: 1 }}>
           {
             <HomeStyle

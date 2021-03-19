@@ -6,6 +6,9 @@ import fontFamily from "../../styles/fontFamily";
 import {showMessage} from 'react-native-flash-message'
 import validator from "../../utils/validations";
 import api from '../../redux/actions'
+import imagePath from "../../constants/imagePath";
+// import { connect} from 'react-redux';
+
 //import Test from "./Test";
 
 class Login extends Component{
@@ -63,7 +66,7 @@ const {userEmail,password}=this.state
 <View
           style={styles.part1}
         >
-          
+        
           <Text style={styles.textPart1}>
             Login 
           </Text>
@@ -74,10 +77,7 @@ const {userEmail,password}=this.state
               >
                 <Image
                   style={styles.facebookImage}
-                  source={{
-                    uri:
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKKgI9pF1hBouy0Xt5sm16Or0Y7uSEFGoiEQ&usqp=CAU",
-                  }}
+                  source={imagePath.facebookImage}
                 />
                 <Text>FACEBOOK</Text>
               </View>
@@ -88,10 +88,7 @@ const {userEmail,password}=this.state
               >
                 <Image
                   style={styles.googleImage}
-                  source={{
-                    uri:
-                      "https://o.remove.bg/downloads/9b4ad480-c326-4287-8147-28689c05b124/c3a26c0c8b6110d2e232e72c79c1ba68-removebg-preview.png",
-                  }}
+                  source={imagePath.googleImage}
                 />
                 <Text>GOOGLE</Text>
               </View>
@@ -149,9 +146,19 @@ const {userEmail,password}=this.state
     )
   }
 }
-
-
 export default Login;
+
+
+// const mapStateToProps=state=>{
+
+//   return(
+//     {
+//       userData:state.userData
+//     }
+//   )
+// }
+
+// export default connect(mapStateToProps)(Login)
 const styles = StyleSheet.create({
 flexView:{flex:1,marginTop:30},
 part1:{
@@ -164,22 +171,24 @@ part2:{ flexDirection: "row", marginTop: 40 },
 facebookView:{
   flexDirection: "row",
   borderWidth: 1,
-  padding: 15,
+  padding: 10,
   borderColor: "grey",
   borderRadius: 5,
   marginRight: 20,
   width: 130,
+  alignItems:"center"
 },
-facebookImage:{ height: 20, width: 20, marginRight: 10 },
+facebookImage:{ height: 30, width: 20, marginRight: 10 },
 googleView:{
   flexDirection: "row",
   borderWidth: 1,
-  padding: 15,
+  padding: 10,
   borderColor: "grey",
   borderRadius: 5,
   width: 130,
+  alignItems:"center"
 },
-googleImage:{ height: 20, width: 20, marginRight: 10 },
+googleImage:{ height: 30, width: 30, marginRight: 10 },
 inputView:{ marginTop: 40 },
 inputViewText:{ fontSize: 15, color: "grey" },
 textInputField:{padding:10,width:300, borderWidth:1 ,marginBottom:20,marginTop:10,borderRadius:10,borderColor:"grey"},

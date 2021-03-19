@@ -1,15 +1,27 @@
 import { reject } from 'lodash';
 import {LOGIN, SIGNUP} from '../../config/urls';
-import {apiPost, setUserData} from "../../utils/utils"
+import {apiPost, setUserData} from "../../utils/utils";
+import store from '../store';
+import types from '../types';
+const {dispatch}=store;
 
 
+export function saveUserData(data){
 
-
+  dispatch({
+    type:types.LOGIN,
+    payload:data
+  })
+  console.log(data,"gggggggggggg")
+}
 export function login(data = {}) {
   return new Promise((resolve,reject)=>{
     apiPost(LOGIN, data).then(res =>{
-      setUserData(res.data);
-      resolve(res);
+      setUserData(res.data).then(suc=>{
+        saveUserData(res.data);
+       })
+       console.log(JSON.stringify(res.data)+"asyncStorage")
+       resolve(res)
     })
     .catch(error=>{
       reject(error);
@@ -29,4 +41,12 @@ export function signUp(data = {}){
   reject(error)
     })
   })
+}
+
+export function addList(object)  {
+  return{
+      type: types.ADD_LIST,
+      payload:{object}
+  }
+   
 }
