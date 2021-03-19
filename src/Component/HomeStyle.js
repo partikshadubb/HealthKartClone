@@ -89,7 +89,7 @@ function HomeStyle(props) {
               </View>
             </View>
           </TouchableOpacity>
-          {/* <TouchableOpacity onPress={()=>{cartCounter(item)}}>
+          <TouchableOpacity onPress={()=>{cartCounter(item)}}>
             <View
               style={{
                 borderWidth: 1,
@@ -103,7 +103,7 @@ function HomeStyle(props) {
             >
               <Text style={{ color: "grey" }}>Add To Cart</Text>
             </View>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </View>
       </View>
     );

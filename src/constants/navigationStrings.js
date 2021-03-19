@@ -7,7 +7,7 @@ export default {
     VIDEO:'video',
     GAME_ZONE:'gameZone',
     LANDING_PAGE:'landingPage',
-   
+    CART:'cart',
     MAIN_PAGE:'mainPage',
     DETAIL_PAGE:'detailPage'
 

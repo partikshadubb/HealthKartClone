@@ -7,6 +7,7 @@ import {
   MainPage,
   HomePage,
   DetailPage,
+  Cart,
 } from "../Screen";
 import navigationStrings from "../constants/navigationStrings";
 const Stack = createStackNavigator();
@@ -51,6 +52,8 @@ function AuthStack() {
         name={navigationStrings.DETAIL_PAGE}
         component={DetailPage}
       />
+      
+     
     </React.Fragment>
   );
 }

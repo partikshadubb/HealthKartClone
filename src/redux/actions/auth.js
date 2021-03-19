@@ -14,6 +14,9 @@ export function saveUserData(data){
   })
   console.log(data,"gggggggggggg")
 }
+
+
+
 export function login(data = {}) {
   return new Promise((resolve,reject)=>{
     apiPost(LOGIN, data).then(res =>{
@@ -43,10 +46,11 @@ export function signUp(data = {}){
   })
 }
 
-export function addList(object)  {
+export function addList(item)  {
+  console.log(item,"in reducer")
   return{
       type: types.ADD_LIST,
-      payload:{object}
+      payload: item
   }
    
 }
