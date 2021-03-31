@@ -11,9 +11,13 @@ export default function SearchBar({containerStyle = {}, placeholder = ''}) {
       style={{
         flexDirection: 'row',
         paddingHorizontal: moderateScale(16),
-        height: moderateScaleVertical(48),
+        height: moderateScaleVertical(38),
         backgroundColor: colors.white,
         alignItems: 'center',
+        borderWidth:1,
+        borderRadius:25,
+        borderColor:colors.black,
+        position:"relative",
         ...containerStyle,
       }}>
       <Image style={{opacity: 0.7}} source={imagePath.search} />

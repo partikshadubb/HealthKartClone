@@ -6,32 +6,37 @@ import FlashMessage from 'react-native-flash-message'
 import {Provider} from 'react-redux'
 import store from './src/redux/store';
 import {getUserData} from '././src/utils/utils'
-
+import actions from './src/redux/actions';
+import types from './src/redux/types';
+import SplashScreen from 'react-native-splash-screen'
 // create a component
 class App extends Component {
   constructor(props){
     super(props);
     this.state={
-      isLogged:false
+     
     }
   }
   componentDidMount()
   {
     getUserData().then((res)=>
     {
-     if(res)
-     {
-       this.setState({isLogged:true})
-     }
+      actions.saveUserData(res);
+      setTimeout(()=>{
+        SplashScreen.hide()
+      },3000)
+     console.log(res,"in app .....................")
+    //  this.setState({userData:userInfo})
     })
+   
+    
   }
 
   render(){
-    const {isLogged}=this.state
     return(
       
       <Provider store={store}>
-      <Routes isLogged={isLogged}/>
+      <Routes />
       <FlashMessage position="top"/>
       </Provider>
     )

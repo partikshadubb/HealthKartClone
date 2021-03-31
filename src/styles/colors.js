@@ -1,5 +1,5 @@
 export default {
-  themeColor: '#00bfbf',
+  // themeColor: '#00bfbf',
   btnABlue: '#306F94',
   btnBBlue: '#32A3E0',
   textBlue:"#1A76CA",
@@ -26,7 +26,10 @@ export default {
   textGreyB:"#8E9193",
   buyBgDark:"#282828",
   whiteOpacity77:"rgba(255,255,255,0.77)",
-  lightGreyBg:"#e8e8e8"
-
-
+  lightGreyBg:"#e8e8e8",
+  lightGrey:"#ddd",
+   grey:"#aaa",
+   darkGrey:"grey",
+   red:"red",
 };
+

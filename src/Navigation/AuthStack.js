@@ -8,6 +8,8 @@ import {
   HomePage,
   DetailPage,
   Cart,
+  MobileOTP,
+  OTPScreen,
 } from "../Screen";
 import navigationStrings from "../constants/navigationStrings";
 const Stack = createStackNavigator();
@@ -36,6 +38,20 @@ function AuthStack() {
         }}
         name={navigationStrings.SIGNUP}
         component={Signup}
+      />
+<Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={navigationStrings.MOBILEOTP}
+        component={MobileOTP}
+      />
+<Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={navigationStrings.OTP_SCREEN}
+        component={OTPScreen}
       />
       <Stack.Screen
         options={{

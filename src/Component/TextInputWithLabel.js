@@ -17,6 +17,7 @@ import fontFamily from '../styles/fontFamily';
 
 const TextInputWithLabel = ({
   label,
+  color,
   onChangeText,
   value,
   active = false,
@@ -24,8 +25,10 @@ const TextInputWithLabel = ({
   rightIcon,
   customTextStyle = {},
   placeholder="",
+  borderColor,
   onPress = () => {},
   onPressRightIcon = () => {},
+  
   ...rest
 }) => {
   let currentColor = active ? colors.themeColor : colors.textGrey;
@@ -34,7 +37,7 @@ const TextInputWithLabel = ({
       <Text
         style={{
           ...commonStyles.fontSize14,
-          color: currentColor,
+          color:color,
           marginBottom: moderateScaleVertical(7),
         }}>
         {label}
@@ -48,7 +51,7 @@ const TextInputWithLabel = ({
           style={{
             flex: 1,
             ...styles.textInput,
-            borderColor: currentColor,
+            borderColor:borderColor,
             ...customTextStyle,
           }}
           onChangeText={onChangeText}
@@ -66,6 +69,8 @@ const TextInputWithLabel = ({
     </View>
   );
 };
+
+
 
 export default TextInputWithLabel;
 

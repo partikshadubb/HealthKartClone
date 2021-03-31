@@ -8,7 +8,10 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
+import { color } from "react-native-reanimated";
+import { connect } from "react-redux";
 import DetailPage from "../Screen/DetailPage/DetailPage";
+import colors from "../styles/colors";
 
 function HomeStyle(props) {
   const { shoeList, cartCounter ,addCartArray} = props;
@@ -23,31 +26,32 @@ function HomeStyle(props) {
       discount,
       caption,
     } = item;
-
+const {themeColor}=props
     // console.log(addCartArray,"asdfghj")
     return (
       <View
         style={{
           flex: 1,
-          backgroundColor: "white",
+          backgroundColor: colors.white,
           borderRadius: 10,
-          margin: 5,
+          marginHorizontal: 5,
           borderWidth: 1,
           padding: 5,
-          borderColor: "#ddd",
+          borderColor: colors.lightGrey,
+          marginBottom:10
         }}
       >
         <View>
           <TouchableOpacity>
             <View
               style={{
-                backgroundColor: "white",
+                backgroundColor: colors.white,
                 borderRadius: 10,
                 justifyContent: "center",
               }}
             >
               <View>
-                <Image style={{ height: 190 }} source={{ uri: image }} />
+                <Image style={{ height: 190,resizeMode:"contain",width:"100%" }} source={ image } />
               </View>
               <Text
                 style={{
@@ -59,7 +63,7 @@ function HomeStyle(props) {
               >
                 {name}
               </Text>
-              <Text style={{ fontSize: 13, color: "gray" }}>{caption}</Text>
+              <Text style={{ fontSize: 13, color: colors.darkGrey }}>{caption}</Text>
               <View
                 style={{
                   display: "flex",
@@ -68,14 +72,14 @@ function HomeStyle(props) {
                 }}
               >
                 <Text
-                  style={{ fontSize: 12, fontWeight: "bold", color: "black" }}
+                  style={{ fontSize: 12, fontWeight: "bold", color: colors.black }}
                 >
                   Rs.{reducedPrice}
                 </Text>
                 <Text
                   style={{
                     fontSize: 11,
-                    color: "#aaa",
+                    color: colors.grey,
                     marginLeft: 7,
                     textDecorationLine: "line-through",
                   }}
@@ -83,7 +87,7 @@ function HomeStyle(props) {
                   Rs.{originalPrice}{" "}
                 </Text>
 
-                <Text style={{ fontSize: 12, color: "#e0436c", marginLeft: 5 }}>
+                <Text style={{ fontSize: 12, color: themeColor, marginLeft:1 }}>
                   ({discount}%OFF)
                 </Text>
               </View>
@@ -92,16 +96,17 @@ function HomeStyle(props) {
           <TouchableOpacity onPress={()=>{cartCounter(item)}}>
             <View
               style={{
-                borderWidth: 1,
+              
                 height: 30,
                 justifyContent: "center",
                 alignItems: "center",
-                borderColor: "black",
+                
                 marginVertical: 10,
                 borderRadius: 5,
+                backgroundColor:themeColor
               }}
             >
-              <Text style={{ color: "grey" }}>Add To Cart</Text>
+              <Text style={{ color:colors.white }}>Add To Cart</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -121,4 +126,13 @@ function HomeStyle(props) {
 
 const styles = StyleSheet.create({});
 
-export default HomeStyle;
+const mapStateToProps = state =>{
+  return(
+    {
+    themeColor:state.themeReducer.themeColor
+
+    }
+  )
+}
+
+export default connect(mapStateToProps)(HomeStyle);

@@ -3,17 +3,19 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack'
 import MainStack from '../Navigation/MainStack';
 import AuthStack from '../Navigation/AuthStack';
-import {connect,useSelector} from 'react-redux'
+import {connect} from 'react-redux'
+// import { baseProps } from 'react-native-gesture-handler/lib/typescript/handlers/gestureHandlers';
 const Stack=createStackNavigator();
 
 
- function Routes(){
-    const userData = useSelector(state => state.auth.userData);
-    console.log(userData,"in Routes")
+ function Routes(props){
+ const {userData}=props
+ console.log(props.userData.accessToken,"in routes")
+
     return(
         <NavigationContainer>
             <Stack.Navigator>
-            {!userData && AuthStack()}
+            {!userData.accessToken &&  AuthStack()}
         {MainStack()}
                 
                
@@ -25,7 +27,7 @@ const mapStateToProps=state=>{
 
     return(
       {
-        userData:state
+        userData:state.auth.userData
       }
     )
   }

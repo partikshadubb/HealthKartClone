@@ -4,11 +4,12 @@ import commonStyles from '../styles/commonStyles';
 import colors from '../styles/colors';
 import {textScale} from '../styles/responsiveSize';
 
-export default function() {
+export default function({bgColor}) {
+
     return(
         <StatusBar
         animated={true}
-        backgroundColor={colors.themeColor}
+        backgroundColor={bgColor}
        
         />
     )

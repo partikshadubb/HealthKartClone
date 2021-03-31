@@ -1,11 +1,30 @@
 import React, { Component } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { color } from "react-native-reanimated";
+import { connect } from "react-redux";
+import imagePath from "../../constants/imagePath";
+import strings from "../../constants/lang";
+import actions from "../../redux/actions";
+import colors from "../../styles/colors";
+import fontFamily from "../../styles/fontFamily";
 
-export default class Profile extends Component {
+ class Profile extends Component {
+
+
+
+changeTheme=()=>{
+// let newColor={themeColor:"red"}
+console.log(this.props, "Profile init")
+actions.switchTheme(this.props.themeColor)
+console.log(this.props, "Profile final")
+
+}
+
   render() {
+    const {themeColor}=this.props
     return (
-      <View style={{ flex: 1, marginTop: 30 }}>
+      <View style={{ flex: 1 }}>
         <View
           style={{
             flexDirection: "row",
@@ -26,7 +45,7 @@ export default class Profile extends Component {
               marginLeft: 10,
             }}
           >
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => this.props.navigation.navigate("Home")}
             >
               <Image
@@ -36,8 +55,9 @@ export default class Profile extends Component {
                     "https://o.remove.bg/downloads/38477b69-12db-4609-9b99-4057b5fff7d4/images-removebg-preview.png",
                 }}
               />
-            </TouchableOpacity>
-            <Text style={{ marginLeft: 20, fontWeight: "bold" }}>Profile</Text>
+            </TouchableOpacity> */}
+            <Text style={{  fontFamily:fontFamily.bold,
+    fontSize: 20, color:themeColor,paddingHorizontal:10}}>{strings.PROFILE}</Text>
           </View>
         </View>
         <ScrollView>
@@ -60,7 +80,7 @@ export default class Profile extends Component {
 
           <View
             style={{
-              backgroundColor: "white",
+              backgroundColor: colors.white,
               marginTop: 10,
               paddingLeft: 10,
               paddingBottom: 10,
@@ -72,7 +92,7 @@ export default class Profile extends Component {
                 flexDirection: "row",
                 justifyContent: "space-between",
                 marginRight: 10,
-                borderBottomColor: "#ddd",
+                borderBottomColor: colors.lightGrey,
                 borderBottomWidth: 1,
                 paddingBottom: 20,
               }}
@@ -80,24 +100,19 @@ export default class Profile extends Component {
               <View style={{ flexDirection: "row" }}>
                 <Image
                   style={{ height: 25, width: 25 }}
-                  source={{
-                    uri:
-                      "https://o.remove.bg/downloads/24a9dbd5-17e5-4e4e-a488-28dd847abb5f/images-removebg-preview.png",
-                  }}
+                  source={imagePath.leftArrow}
                 />
+                <TouchableOpacity onPress={this.changeTheme}>
                 <Text
-                  style={{ fontSize: 17, fontWeight: "bold", marginLeft: 10 }}
+                  style={{ fontSize: 17,
+                     fontWeight: "bold",
+                      marginLeft: 10 }}
                 >
-                  Orders
+                  Change Theme
                 </Text>
+                </TouchableOpacity>
               </View>
-              <Image
-                style={{ height: 20, width: 20 }}
-                source={{
-                  uri:
-                    "https://o.remove.bg/downloads/330f8bb7-be5f-433d-9d66-51e361ea5aa1/273-2739689_right-grey-arrow-icon-png-png-images-next-removebg-preview.png",
-                }}
-              />
+              
             </View>
 
             <View
@@ -105,7 +120,7 @@ export default class Profile extends Component {
                 flexDirection: "row",
                 justifyContent: "space-between",
                 marginRight: 10,
-                borderBottomColor: "#ddd",
+                borderBottomColor: colors.lightGrey,
                 borderBottomWidth: 1,
                 paddingBottom: 20,
                 marginTop: 15,
@@ -114,24 +129,17 @@ export default class Profile extends Component {
               <View style={{ flexDirection: "row" }}>
                 <Image
                   style={{ height: 25, width: 25 }}
-                  source={{
-                    uri:
-                      "https://o.remove.bg/downloads/297fa406-3b0c-4d1b-856e-c215ec767760/images-removebg-preview.png",
-                  }}
+                  source={imagePath.leftArrow}
                 />
                 <Text
-                  style={{ fontSize: 17, fontWeight: "bold", marginLeft: 10 }}
+                  style={{ fontSize: 17,
+                     fontWeight: "bold",
+                      marginLeft: 10 }}
                 >
                   Help
                 </Text>
               </View>
-              <Image
-                style={{ height: 20, width: 20 }}
-                source={{
-                  uri:
-                    "https://o.remove.bg/downloads/330f8bb7-be5f-433d-9d66-51e361ea5aa1/273-2739689_right-grey-arrow-icon-png-png-images-next-removebg-preview.png",
-                }}
-              />
+              
             </View>
 
             <View
@@ -146,30 +154,23 @@ export default class Profile extends Component {
               <View style={{ flexDirection: "row" }}>
                 <Image
                   style={{ height: 25, width: 25 }}
-                  source={{
-                    uri:
-                      "https://o.remove.bg/downloads/ef470b7f-395f-401d-b2f8-2c3c4421ed6f/images-removebg-preview.png",
-                  }}
+                  source={imagePath.leftArrow}
                 />
                 <Text
-                  style={{ fontSize: 17, fontWeight: "bold", marginLeft: 10 }}
+                  style={{ fontSize: 17, 
+                    fontWeight: "bold", 
+                    marginLeft: 10 }}
                 >
                   Wishlist
                 </Text>
               </View>
-              <Image
-                style={{ height: 20, width: 20 }}
-                source={{
-                  uri:
-                    "https://o.remove.bg/downloads/330f8bb7-be5f-433d-9d66-51e361ea5aa1/273-2739689_right-grey-arrow-icon-png-png-images-next-removebg-preview.png",
-                }}
-              />
+             
             </View>
           </View>
 
           <View
             style={{
-              backgroundColor: "white",
+              backgroundColor: colors.white,
               marginTop: 10,
               paddingLeft: 10,
               paddingBottom: 10,
@@ -181,7 +182,7 @@ export default class Profile extends Component {
                 flexDirection: "row",
                 justifyContent: "space-between",
                 marginRight: 10,
-                borderBottomColor: "#ddd",
+                borderBottomColor: colors.lightGrey,
                 borderBottomWidth: 1,
                 paddingBottom: 20,
               }}
@@ -189,24 +190,17 @@ export default class Profile extends Component {
               <View style={{ flexDirection: "row" }}>
                 <Image
                   style={{ height: 25, width: 25 }}
-                  source={{
-                    uri:
-                      "https://o.remove.bg/downloads/e6e9ed9c-af43-4064-9aec-fb86c4eccef0/images-removebg-preview.png",
-                  }}
+                  source={imagePath.leftArrow}
                 />
                 <Text
-                  style={{ fontSize: 17, fontWeight: "bold", marginLeft: 10 }}
+                  style={{ fontSize: 17, 
+                    fontWeight: "bold",
+                     marginLeft: 10 }}
                 >
                   Scan for coupons
                 </Text>
               </View>
-              <Image
-                style={{ height: 20, width: 20 }}
-                source={{
-                  uri:
-                    "https://o.remove.bg/downloads/330f8bb7-be5f-433d-9d66-51e361ea5aa1/273-2739689_right-grey-arrow-icon-png-png-images-next-removebg-preview.png",
-                }}
-              />
+              
             </View>
 
             <View
@@ -221,10 +215,7 @@ export default class Profile extends Component {
               <View style={{ flexDirection: "row" }}>
                 <Image
                   style={{ height: 25, width: 25 }}
-                  source={{
-                    uri:
-                      "https://o.remove.bg/downloads/82efbf1a-74e3-45db-a049-6bd63c7753e9/images-removebg-preview.png",
-                  }}
+                  source={imagePath.leftArrow}
                 />
                 <Text
                   style={{ fontSize: 17, fontWeight: "bold", marginLeft: 10 }}
@@ -232,32 +223,36 @@ export default class Profile extends Component {
                   Refer & Earns
                 </Text>
               </View>
-              <Image
-                style={{ height: 20, width: 20 }}
-                source={{
-                  uri:
-                    "https://o.remove.bg/downloads/330f8bb7-be5f-433d-9d66-51e361ea5aa1/273-2739689_right-grey-arrow-icon-png-png-images-next-removebg-preview.png",
-                }}
-              />
+             
             </View>
           </View>
 
           <View
             style={{
-              backgroundColor: "white",
+              backgroundColor:colors.white,
               marginTop: 10,
               paddingLeft: 40,
               paddingBottom: 20,
               paddingTop: 10,
             }}
           >
-            <Text style={{ color: "grey" }}>FAQs </Text>
-            <Text style={{ color: "grey" }}>ABOUT US </Text>
-            <Text style={{ color: "grey" }}>TERMS OF USE </Text>
-            <Text style={{ color: "grey" }}>PRIVACY POLICY </Text>
+            <Text style={{ color: colors.darkGrey }}>FAQs </Text>
+            <Text style={{ color: colors.darkGrey }}>ABOUT US </Text>
+            <Text style={{ color: colors.darkGrey }}>TERMS OF USE </Text>
+            <Text style={{ color: colors.darkGrey }}>PRIVACY POLICY </Text>
           </View>
         </ScrollView>
       </View>
     );
   }
 }
+const mapStateToProps = state =>{
+  return(
+    {
+    themeColor:state.themeReducer.themeColor
+
+    }
+  )
+}
+
+export default connect(mapStateToProps)(Profile);

@@ -1,347 +1,370 @@
+
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  StyleSheet,
-  PermissionsAndroid
-  
-} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import CheckBox from 'react-native-check-box';
+import {BorderlessButton, ScrollView} from 'react-native-gesture-handler';
+import ButtonWithLoader from '../../Component/ButtonWithLoader';
+import IconTextRow from '../../Component/IconTextRow';
+import StatusBar from '../../Component/StatusBar';
+import TextInputWithLabel from '../../Component/TextInputWithLabel';
 import imagePath from '../../constants/imagePath';
 import navigationStrings from '../../constants/navigationStrings';
-//import Test from "./Test"
-import {showMessage} from 'react-native-flash-message'
-import validator from '../../utils/validations';
-
-import { date, month, year } from 'is_js';
-// import DateTimePicker from 'react-native-modal-datetime-picker';
-import api from '../../redux/actions';
-// import Loader from '../../Components/Loader';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { getUserData } from '../../utils/utils';
-// import * as ImagePicker from 'react-native-image-picker';
 import colors from '../../styles/colors';
+import commonStyles from '../../styles/commonStyles';
+import fontFamily from '../../styles/fontFamily';
+import {
+  moderateScale,
+  moderateScaleVertical,
+} from '../../styles/responsiveSize';
+import api from '../../redux/actions';
+import {getUserData} from '../../utils/utils';
+import {showMessage} from 'react-native-flash-message';
+import validator from '../../utils/validations';
+import Loader from '../../Component/Loader';
+import strings from '../../constants/lang';
+import { connect } from 'react-redux';
 
-
-
+// create a component
 class Signup extends Component {
-constructor(props){
-  super(props);
-  this.state={
-    username:"",
-    date:"",
-    email:"",
-    password:"",
-    confirmPassword:"",
-    // isDateTimePickerVisible: false,
-    isLoading: false,
-    resourcePath:"https://images.pexels.com/photos/7110197/pexels-photo-7110197.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      phoneNumber: '',
+      isLoading: false,
+    };
   }
 
-}
-onAddText(key) {
- 
-  return (value) => {
-    this.setState({ [key]: value });
+  onAddText(key) {
+    return value => {
+      this.setState({[key]: value});
+    };
+  }
+
+  isValidData = () => {
+    const {
+      username,
+      email,
+      password,
+      confirmPassword,
+      phoneNumber,
+    } = this.state;
+
+    const error = validator({
+      name: username,
+      email: email,
+      phoneNumber: phoneNumber,
+      password: password,
+      confirmPassword: confirmPassword,
+    });
+    if (error) {
+      showMessage({
+        type: 'danger',
+        icon: 'danger',
+        message: error,
+      });
+      return false;
+    }
+    this.setState({isLoading: true});
+    api
+      .signUp({
+        name: username,
+        email: email,
+        phoneNumber: phoneNumber,
+        languageCode: 'EN',
+        signupType: 'APP',
+        password: password,
+      })
+      .then(res => {
+        this.setState({isLoading: false});
+        console.log(res, 'signup');
+        showMessage({
+          message: 'Signup Successfully',
+          type: 'success',
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    this.props.navigation.navigate('home');
+
+    return true;
   };
-}
-
- isValidData = () => {
-  const {username,email,password,confirmPassword}=this.state
-  
-  const error=validator({ name:username,email:email, password:password,confirmPassword:confirmPassword }) 
- if (error) { 
-   showMessage({
-   type:"danger",
- icon:"danger",
- message:error
-   })
-   return false;
-  }
-  this.setState({isLoading: true})
-  api.signUp({name: username, email: email, languageCode: "EN", signupType: "APP",password:password})
-  .then((res)=>{
-    this.setState({isLoading: false})
-    console.log(res)
-    showMessage({
-      message:"Signup Successfully",
-      type:"success"
-    })
-  })
-  .catch((error) => {
-    this.setState({isLoading: false})
-    console.log(error)
-  })
-  this.props.navigation.navigate('homePage')
-
-return true;
- };
-//  showDateTimePicker = () => {
-//   this.setState({ isDateTimePickerVisible: true });
-// };
-
-// hideDateTimePicker = () => {
-//   this.setState({ isDateTimePickerVisible: false });
-// };
-
-// handleDatePicked = (pickDate) => {
-//   console.log("A date has been picked: ",pickDate.getDate());
-//   let DateOfBirth = pickDate.getDate()
-//   let Month = pickDate.getMonth()
-//   console.log(Month)
-//   let Year = pickDate.getFullYear()
-//   let Date = DateOfBirth + "/" + Month + "/" + Year
-//   this.setState({date:Date}, ()=>{
-//     console.log(this.state)
-//   })
-//   // 3 var dob, m, y
-//   // dob = date.get, .getm, getFullYear
-//   // wntetredDAte = dob + "/" + m 
-//   this.hideDateTimePicker();
-// };
-
-profileImageFromGallery = async () => {
-  try {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-      {
-        title: ' Photo App Camera Permission',
-        message:
-          ' Photo App needs access to your camera ' +
-          'so you can take awesome pictures.',
-        buttonNeutral: 'Ask Me Later',
-        buttonNegative: 'Cancel',
-        buttonPositive: 'OK',
-      },
-    );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log('You can use the camera');
-      ImagePicker.launchImageLibrary(
-        {
-          mediaType: 'photo',
-          includeBase64: false,
-          maxHeight: 200,
-          maxWidth: 200,
-          saveToPhotos: true,
-        },
-        (response) => {
-          const imageData = new FormData();
-          imageData.append('image',{
-            uri: response.uri,
-            type: response.type,
-            name: response.fileName,
-          });
-          // this.setState({isLoading:true})
-          api.uploadImage(imageData).then((res)=>{
-            this.setState({resourcePath: response.uri});
-            console.log(res)
-          })
-          .catch((error)=>{
-            console.log(error)
-          })
-          console.log(response);
-         
-        },
-      );
-     
-    }
-     else {
-      console.log('Camera permission denied');
-    }
-  } catch (err) {
-    console.warn(err);
-  }
-};
 
   render() {
-    const {navigation} = this.props;
-    const{date, isLoading,resourcePath}= this.state
+    const {isLoading} = this.state;
+    const{themeColor}=this.props
     return (
-      
-      <View style={styles.flexView}>
+      <View style={styles.container}>
+        <StatusBar />
+
         <View style={styles.navSignup}>
-          <Image
-            style={styles.arrowImage}
-            source={imagePath.leftArrow}
-          />
-          <Text style={styles.signupText}>Sign Up</Text>
+          <Text style={{ fontFamily: fontFamily.bold,
+    fontSize: 20,color:themeColor}}> {strings.SIGN_UP} </Text>
+          <Image style={styles.arrowImage} source={imagePath.crossImage} />
         </View>
-        <KeyboardAwareScrollView>
-          
-        <View style={styles.imageView}>
-          <TouchableOpacity onPress={this.profileImageFromGallery}>
-          <Image style={styles.profileImage} source={{uri:resourcePath}} />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.textFieldView}>
-          <TextInput
-            placeholder="Full Name"
-            // value={userName}
-            onChangeText={this.onAddText("username")}
-            style={styles.textField}
-          
-          />
-
-          <TextInput
-            placeholder="Your Email Address"
-            //value={userEmail}
-            onChangeText={this.onAddText("email")}
-            style={styles.textField2}
-          />
-         <View style={styles.dateView}>
-         <TextInput
-            placeholder="Date of birth"
-             value={date}
-          />
-          <TouchableOpacity
-            
-          >
-            {/* onPress={this.showDateTimePicker} */}
-            <Image style={styles.calenderimage}
-            source={imagePath.calenderImage}/>
-          </TouchableOpacity>
-          </View>
-
-          <TextInput
-            placeholder="Set Password"
-            // value={password}
-            onChangeText={this.onAddText("password")}
-            secureTextEntry={true}
-            style={styles.textField2}
-          />
-
-          <TextInput
-            placeholder="Confirm Password"
-            // value={confirmPassword}
-            onChangeText={this.onAddText("confirmPassword")}
-            secureTextEntry={true}
-            style={styles.textField2}
-          />
-
-         
-          <View style={styles.footerView}>
-            <Text style={styles.footerText1}>Already Registered? </Text>
-            <Text
-              onPress={() => this.props.navigation.navigate("login")}
-              style={styles.footerText2}>
-              Login
+        <ScrollView>
+          <View style={{paddingHorizontal: 15, marginTop: 10}}>
+            <Text style={{fontFamily: fontFamily.bold}}>
+             {strings.SIGN_UP_TEXT}
             </Text>
-            <TouchableOpacity  onPress={() =>this.isValidData() }>
-            <View style={styles.signupButtonView}>
-              <Image style={{height:20,width:20}}
-              source={imagePath.rightArrow} />
-            </View>
-          </TouchableOpacity>
           </View>
-        </View>
-<View style={styles.lastView}>
-  <Text style={{color:"grey"}}>
-    By Signing up you agree to our
-  </Text>
-  <Text style={styles.termsText}>Terms and Conditions</Text>
-</View>
-        {/* <DateTimePicker
-          isVisible={this.state.isDateTimePickerVisible}
-          onConfirm={this.handleDatePicked}
-          onCancel={this.hideDateTimePicker}
-        /> */}
-        {/* <Loader isLoading={isLoading} /> */}
-        </KeyboardAwareScrollView>
+
+          <View style={{paddingHorizontal: 15, marginTop: 15}}>
+            <TextInputWithLabel
+              onChangeText={this.onAddText('username')}
+              label={strings.ENTER_NAME}
+              placeholder={strings.ENTER_NAME}
+              color={themeColor}
+              borderColor={themeColor}
+            />
+          </View>
+
+          <View style={{paddingHorizontal: 15}}>
+            <TextInputWithLabel
+              onChangeText={this.onAddText('phoneNumber')}
+              label={strings.YOUR_PHONE_NUMBER}
+              placeholder={strings.YOUR_PHONE_NUMBER}
+              color={themeColor}
+              borderColor={themeColor}
+
+            />
+          </View>
+
+          <View style={{paddingHorizontal: 15}}>
+            <TextInputWithLabel
+              onChangeText={this.onAddText('email')}
+              label={strings.YOUR_EMAIL}
+              placeholder={strings.YOUR_EMAIL}
+              color={themeColor}
+              borderColor={themeColor}
+            />
+          </View>
+
+          <View style={{paddingHorizontal: 15}}>
+            <TextInputWithLabel
+              onChangeText={this.onAddText('password')}
+              label={strings.ENTER_PASSWORD}
+              placeholder={strings.ENTER_PASSWORD}
+              secureTextEntry={true}
+              color={themeColor}
+              borderColor={themeColor}
+            />
+          </View>
+
+          <View style={{paddingHorizontal: 15}}>
+            <TextInputWithLabel
+              onChangeText={this.onAddText('confirmPassword')}
+              label={strings.CONFIRM_PASSWORD}
+              placeholder={strings.CONFIRM_PASSWORD}
+              secureTextEntry={true}
+              color={themeColor}
+              borderColor={themeColor}
+            />
+          </View>
+
+          <View style={styles.buttonView}>
+            <ButtonWithLoader
+              btnText={strings.SIGN_UP}
+              btnTextStyle={20}
+              onPress={() => this.isValidData()}
+              bgColor={themeColor}
+              btnStyle={styles.buttonStyle}
+            />
+          </View>
+
+          <View style={styles.buttonBottom}>
+            <Text style={{...styles.txtSmall, color: colors.textGreyLight}}>
+              {strings.SIGNUP_AGREEMENT_TEXT}
+              <Text
+                style={{
+                  color: themeColor,
+                  fontFamily: fontFamily.futuraBtHeavy,
+                }}>
+                {strings.TERMS_AND_CONDITIONS}
+              </Text>
+            </Text>
+          </View>
+
+          <View style={styles.socialRow}>
+            <View style={styles.hyphen} />
+            <Text style={styles.orText}>OR</Text>
+            <View style={styles.hyphen} />
+          </View>
+
+          <View style={{flexDirection: 'row'}}></View>
+
+          <View style={styles.socialIconView}>
+            <TouchableOpacity>
+              <View style={styles.iconView}>
+                <Image
+                  style={styles.textFacebook}
+                  source={imagePath.facebookImage}
+                />
+                <Text> {strings.FACEBOOK} </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={styles.iconView2}>
+                <Image
+                  style={styles.textGoogle}
+                  source={imagePath.googleImage}
+                />
+                <Text> {strings.GOOGLE} </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.bottomContainer}>
+            <Text style={{...styles.txtSmall1, color: colors.textGreyLight}}>
+             {strings.ALREADY_HAVE_AN_ACCOUNT}
+              <Text
+                onPress={() =>
+                  this.props.navigation.navigate(navigationStrings.LOGIN)
+                }
+                style={{
+                  color:themeColor,
+                  fontFamily: fontFamily.futuraBtHeavy,
+                }}>
+                {strings.LOGIN}
+              </Text>
+            </Text>
+          </View>
+          <Loader isLoading={isLoading} />
+        </ScrollView>
       </View>
-      
     );
   }
 }
 
-export default Signup;
+// define your styles
 const styles = StyleSheet.create({
-  flexView: {flex: 1},
+  container: {
+    flex: 1,
+  },
   navSignup: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     height: 50,
     alignItems: 'center',
     paddingHorizontal: 10,
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   arrowImage: {
-    height: 30,
-    width: 30,
+    height: 20,
+    width: 20,
+    tintColor: colors.black,
   },
-  signupText: {
-    marginLeft: 110,
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  imageView: {
-    height: 150,
-      // backgroundColor:"white",
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  profileImage: {height: 100,
-     width: 100, borderRadius: 50,backgroundColor:"white",},
-
-  textFieldView: {justifyContent: 'center', alignItems: 'center'},
-
-  textField: {
-    borderRadius: 10,
-    borderColor: '#ddd',
-    width: 320,
-    padding: 10,
-    marginTop: 10,
-    marginBottom: 15,
-    borderWidth: 1,
-    backgroundColor: 'white',
-  },
-  textField2: {
-    borderRadius: 10,
-    borderColor: '#ddd',
-    width: 320,
-    padding: 10,
-    borderWidth: 1,
-    marginBottom: 15,
-    backgroundColor: 'white',
-  },
-  signupButtonView: {
+  // loginText: {
+  //   fontFamily: fontFamily.bold,
+  //   fontSize: 20,
     
-    height: 60,
-    backgroundColor: colors.themeMain,
-    width: 60,
+  // },
+  checkBoxView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+  },
+  buttonView: {
+    marginHorizontal: 15,
+    height: 70,
+    marginTop: -10,
+   
+  },
+  socialRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  hyphen: {
+    width: 130,
+    height: 1,
+    backgroundColor: colors.textGrey,
+    opacity: 0.6,
+  },
+  orText: {
+    ...commonStyles.mediumFont14,
+    lineHeight: 24,
+    textAlign: 'center',
+    fontFamily: fontFamily.medium,
+    opacity: 0.6,
+    marginTop: 0,
+    marginHorizontal: moderateScale(16),
+  },
+  socialRowBtn: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: moderateScaleVertical(40),
+  },
+  socialIconView: {
+    flexDirection: 'row',
+    marginVertical: 10,
+    paddingHorizontal: 20,
+    justifyContent: 'space-between',
+  },
+  iconView: {
+    flexDirection: 'row',
+    borderWidth: 1,
+    padding: 5,
+    borderColor: colors.btnABlue,
+    borderRadius: 5,
+    marginRight: 20,
+    width: 130,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 30,
   },
-  dateOfBirthText:{
-color:"#959c97",
-padding:3
+  iconView2: {
+    flexDirection: 'row',
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: colors.orange,
+    borderRadius: 5,
+    width: 130,
+    padding: 5,
   },
-  dateView:{flexDirection:"row",borderRadius: 10,
-  borderColor: '#ddd',
-  width: 320,
-  alignItems:"center",
-  justifyContent:"space-between",
-  paddingHorizontal:5,
-  borderWidth: 1,
-  marginBottom: 15,
-  backgroundColor: 'white',height:50},
-calenderimage:{height:20,width:20,marginRight:20},
-  buttonText: {fontSize: 17, 
-    fontWeight: 'bold',
-     color: 'white'},
-  footerView: {flexDirection: 'row',
-   
-   alignItems:"center",
-marginHorizontal:10,
-},
-  footerText1: {color: 'gray', fontSize: 15},
-  footerText2: {fontSize: 16,
-     fontWeight: 'bold',
-      color: colors.themeMain,marginRight:50},
-lastView:{justifyContent:"center",alignItems:"center",marginTop:50},
-termsText:{color:colors.themeMain,fontSize:13},
+  textFacebook: {height: 30, width: 30,
+     marginRight: 3},
+  textGoogle: {height: 30, width: 30,
+     marginRight: 10},
+  bottomContainer: {
+    // flex: 1,
+    // justifyContent: 'flex-end',
+    marginBottom: moderateScaleVertical(30),
+  },
+  txtSmall: {
+    ...commonStyles.mediumFont14,
+    lineHeight: 24,
+    textAlign: 'center',
+    fontFamily: fontFamily.medium,
+    marginTop: moderateScaleVertical(15),
+  },
+  buttonBottom: {
+    marginTop: -13,
+    marginBottom: moderateScaleVertical(30),
+  },
+  txtSmall1: {
+    ...commonStyles.mediumFont14,
+    lineHeight: 24,
+    textAlign: 'center',
+    fontFamily: fontFamily.medium,
+    marginTop: moderateScaleVertical(15),
+    fontSize: 16,
+  },
+  buttonStyle:{borderWidth:0}
+});
 
-    });
+const mapStateToProps = state =>{
+  return(
+    {
+    cartList : state.homeList.cartList,
+    themeColor:state.themeReducer.themeColor
+
+    }
+  )
+}
+//make this component available to the app
+export default connect(mapStateToProps)(Signup);

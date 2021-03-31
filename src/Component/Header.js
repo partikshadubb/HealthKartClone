@@ -1,86 +1,73 @@
-import React from 'react';
-import {Text, View, Image, TouchableOpacity, StyleSheet} from 'react-native';
-
-import fontFamily from '../styles/fontFamily';
-import colors from '../styles/colors';
+import React from 'react'
+import {View,Text,Image,TextInput,StyleSheet, Touchable} from 'react-native'
+import imagePath from '../constants/imagePath'
+import colors from '../styles/colors'
+import {connect} from 'react-redux';
 import {
-  textScale,
-  moderateScale,
-  moderateScaleVertical,
-} from '../styles/responsiveSize';
-import imagePath from '../constants/imagePath';
-import {useNavigation} from '@react-navigation/native';
-import {hitSlopProp} from '../styles/commonStyles';
-
-const Header = ({
-  leftIcon = imagePath.back,
-  centerTitle,
-  textStyle,
-  horizontLine = true,
-  rightIcon = '',
-  onPressLeft,
-  onPressRight,
-  customRight,
-  hideRight=true
-}) => {
-  const navigation = useNavigation();
-  return (
-    <>
-      <View
-        style={{
-          ...styles.headerStyle,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
-          <View style={{alignItems:'flex-start',minWidth:moderateScale(72)}}>
-        <TouchableOpacity
-          hitSlop={hitSlopProp}
-          activeOpacity={0.7}
-          onPress={
-            !!onPressLeft
-              ? onPressLeft
-              : () => {
-                  navigation.goBack();
-                }
-          }>
-          <Image resizeMode="contain" source={leftIcon} />
-        </TouchableOpacity>
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native-gesture-handler';
+import ButtonWithLoader from './ButtonWithLoader'
+import { height } from '../styles/responsiveSize'
+ function Header(props) {
+    const{navigation,onLogout,changeTheme}=props
+    console.log(props.themeColor.themeColor,"headerColor")
+    const{themeColor}=props
+    return(
+        <View style={styles.navbar}>
+        <View
+          style={{ flexDirection: "row",height:50, justifyContent: "space-between",alignItems:"center" }}
+        >
+          <View style={{ flexDirection: "row",justifyContent:"center",alignItems:"center" }}>
+            <TouchableOpacity onPress={()=>onLogout()}>
+             
+            <Image
+              style={{ height: 20, width: 30 ,tintColor:themeColor}}
+              source={imagePath.menu}
+            />
+            </TouchableOpacity>
+            <Text style={{color:themeColor ,fontSize:20,marginLeft:10}}>
+              HEALT
+              <Text style={{backgroundColor:themeColor ,color:colors.white}}>HK</Text>ART</Text>
+          </View>
+         
+         {/* <TouchableOpacity  onPress={()=>changeTheme()} >
+           <ButtonWithLoader btnText="ChangeTheme" />
+         </TouchableOpacity> */}
+           
+            <TouchableOpacity
+              //{newItem:cartArray, price:price }
+              onPress={()=>navigation.navigate('Cart')}
+            >
+              <Image
+                style={{ height: 27, width: 27 ,marginHorizontal:10}}
+                source={imagePath.cart}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-        <Text
-          style={{
-            ...styles.textStyle,
-            ...textStyle,
-            width: moderateScale(150),
-          }}>
-          {centerTitle}
-        </Text>
-        <View style={{alignItems:'flex-end',minWidth:moderateScale(72)}}>
-        {!!rightIcon ? (
-          <TouchableOpacity onPress={onPressRight}>
-            <Image source={rightIcon} />
-          </TouchableOpacity>
-        ) : !!customRight ? (
-          customRight()
-        ) : (
-         hideRight? <View style={{width: 25}} />:<Image source={imagePath.cartShop}/>
-        )}
-        </View>
-      </View>
-    </>
-  );
-};
-export default Header;
-const styles = StyleSheet.create({
-  headerStyle: {
-    padding: moderateScaleVertical(16),
-  },
 
-  textStyle: {
-    color: colors.black2Color,
-    fontSize: textScale(17),
-    lineHeight: textScale(28),
-    textAlign: 'center',
-    fontFamily: fontFamily.futuraBtHeavy,
-  },
-});
+     
+)
+    }
+    // export default Header;
+    const styles = StyleSheet.create({
+        navbar: {
+          backgroundColor: colors.white,
+          height: 50,
+          // borderBottomWidth:.6,
+          // borderBottomColor:colors.lightGreyBg
+        },
+    })
+
+    const mapStateToProps = state =>{
+      return(
+        {
+        themeColor:state.themeReducer.themeColor
+    
+        }
+      )
+    }
+
+export default connect(mapStateToProps)(Header);

@@ -10,13 +10,14 @@ const ButtonWithLoader = ({
   btnStyle = {},
   isLoading = false,
   color = colors.white,
+  bgColor 
 }) => {
   return (
     <TouchableOpacity
-      style={{
+      style={{ btnStyle,
         ...commonStyles.buttonRect,
         marginTop: moderateScaleVertical(20),
-        ...btnStyle,
+        ...btnStyle, backgroundColor:bgColor
       }}
       onPress={onPress}>
       {isLoading ? (

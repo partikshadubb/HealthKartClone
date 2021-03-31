@@ -1,8 +1,9 @@
+import { clearUserData } from "../../utils/utils";
 import types from "../types";
 
 const initialState={
     userData:{
-        name:""
+        
     }
 }
 
@@ -19,6 +20,17 @@ export default function (state=initialState,action) {
             return {...state,userData}
         }
     
+case types.LOGOUT:{
+ clearUserData()
+ const data = {...action.payload}
+   return{
+     ...state,userData: data
+}
+
+}
+
+
+
 
         default:{
             return {...state}

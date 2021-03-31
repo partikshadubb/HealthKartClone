@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    backgroundColor: "white",
+    backgroundColor:colors.white,
     alignItems: "center",
     height: 50,
     paddingTop: 5,
@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   viewProductDetails: {
-    backgroundColor: "white",
+    backgroundColor: colors.white,
     paddingBottom: 10,
   },
   viewProductName: {

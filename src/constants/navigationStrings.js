@@ -9,6 +9,7 @@ export default {
     LANDING_PAGE:'landingPage',
     CART:'cart',
     MAIN_PAGE:'mainPage',
-    DETAIL_PAGE:'detailPage'
-
+    DETAIL_PAGE:'detailPage',
+    MOBILEOTP:'mobileOtp',
+    OTP_SCREEN:'otpScreen',
 }
