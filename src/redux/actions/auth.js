@@ -1,7 +1,7 @@
 import { reject } from 'lodash';
-import {LOGIN, SIGNUP,OTP_RECIEVE, OTP_VARIFY} from '../../config/urls';
+import {LOGIN, SIGNUP,OTP_RECIEVE, OTP_VARIFY, SEARCH} from '../../config/urls';
 import { MobileOTP } from '../../Screen';
-import {apiPost, setUserData} from "../../utils/utils";
+import {apiPost, setUserData,apiGet} from "../../utils/utils";
 import store from '../store';
 import types from '../types';
 const {dispatch}=store;
@@ -38,7 +38,6 @@ export function signUp(data = {}){
   return new Promise((resovle,reject)=>
   {
     apiPost(SIGNUP, data).then(res=>{
-      // setUserData(res.data);
       resovle(res)
     }).catch(error=>
     {
@@ -81,3 +80,4 @@ export function logout () {
     payload:null
   })
 }
+

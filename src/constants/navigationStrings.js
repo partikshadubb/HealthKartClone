@@ -12,4 +12,5 @@ export default {
     DETAIL_PAGE:'detailPage',
     MOBILEOTP:'mobileOtp',
     OTP_SCREEN:'otpScreen',
+    SEARCH:'search',
 }

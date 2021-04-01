@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image,Modal ,FlatList} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { color } from "react-native-reanimated";
 import { connect } from "react-redux";
@@ -10,16 +10,57 @@ import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
 
  class Profile extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      isModalVisible:false,
+      colors: [
+        {id: 1, colorId: 'red'},
+        {id: 2, colorId: 'blue'},
+        {id: 3, colorId: 'green'},
+        {id: 4, colorId: 'pink'},
+        
+      ],
+    }
+    
+  }
 
 
-
-changeTheme=()=>{
-// let newColor={themeColor:"red"}
-console.log(this.props, "Profile init")
-actions.switchTheme(this.props.themeColor)
-console.log(this.props, "Profile final")
+changeTheme=(colorId)=>{
+  console.log(colorId,"id");
+   let newColor= colorId
+actions.switchTheme(newColor)
+this.setState({ isModalVisible: false });
 
 }
+
+
+openModal = () => {
+  this.setState({ isModalVisible: true });
+};
+onCloseModal = () => {
+  this.setState({ isModalVisible: false });
+};
+
+_renderItem = (item) => {
+  const {colorId} = item.item;
+  console.log(colorId, 'color id');
+  return (
+    <View>
+      <TouchableOpacity
+        onPress={() => this.changeTheme(colorId)}
+        style={{backgroundColor: colorId, margin: 5,borderRadius:10, width: 170,
+          height: 100,
+          alignSelf: 'center',
+         borderRadius:10,
+         
+          alignItems:"center",
+          justifyContent:"center"}}>
+       <Text>{colorId}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
   render() {
     const {themeColor}=this.props
@@ -45,17 +86,7 @@ console.log(this.props, "Profile final")
               marginLeft: 10,
             }}
           >
-            {/* <TouchableOpacity
-              onPress={() => this.props.navigation.navigate("Home")}
-            >
-              <Image
-                style={{ height: 25, width: 25 }}
-                source={{
-                  uri:
-                    "https://o.remove.bg/downloads/38477b69-12db-4609-9b99-4057b5fff7d4/images-removebg-preview.png",
-                }}
-              />
-            </TouchableOpacity> */}
+            
             <Text style={{  fontFamily:fontFamily.bold,
     fontSize: 20, color:themeColor,paddingHorizontal:10}}>{strings.PROFILE}</Text>
           </View>
@@ -102,7 +133,7 @@ console.log(this.props, "Profile final")
                   style={{ height: 25, width: 25 }}
                   source={imagePath.leftArrow}
                 />
-                <TouchableOpacity onPress={this.changeTheme}>
+                <TouchableOpacity onPress={this.openModal}>
                 <Text
                   style={{ fontSize: 17,
                      fontWeight: "bold",
@@ -242,7 +273,45 @@ console.log(this.props, "Profile final")
             <Text style={{ color: colors.darkGrey }}>PRIVACY POLICY </Text>
           </View>
         </ScrollView>
+
+        <Modal
+          transparent
+          onRequestClose={this.onCloseModal}
+          visible={this.state.isModalVisible}
+        >
+          <View
+            style={{ flex: 1, backgroundColor: "rgba(0,0,0,0)", 
+            alignItems:"center",}}
+          >
+            <View
+              style={{
+               borderRadius:10,
+                height:300,
+                backgroundColor: "rgba(0,0,0,0.6)"
+              }}
+            >
+             
+             <TouchableOpacity onPress={this.onCloseModal}>
+             <Image
+                  style={{ height: 30, width: 40,left:320 }}
+                  source={imagePath.crossImage}
+                />
+             </TouchableOpacity>
+             
+              <FlatList
+                data={this.state.colors}
+                renderItem={this._renderItem}
+                numColumns={2}
+                
+              />
+            
+            </View>
+          </View>
+        </Modal>
+        
       </View>
+
+      
     );
   }
 }

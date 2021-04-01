@@ -18,6 +18,7 @@ import colors from '../../styles/colors';
 import fontFamily from '../../styles/fontFamily';
 import {apiPost} from '../../utils/utils';
  import imagePath from '../../constants/imagePath';
+import SearchBar from '../../Component/SearchBar';
 
 const Limit=5
  class LatestDeals extends Component {
@@ -206,6 +207,7 @@ console.log("apicall");
           </View>
         </View>
 
+
         <FlatList
           data={data}
           renderItem={item => this.renderItem(item)}
@@ -214,6 +216,7 @@ console.log("apicall");
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
+              
               onRefresh={this._onRefresh}
             />
           }

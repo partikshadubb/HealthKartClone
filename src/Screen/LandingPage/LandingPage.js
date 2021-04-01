@@ -232,7 +232,7 @@ const{width,height} =Dimensions.get("screen")
    
   }
 
-    _renderItem({item,index}){
+    _renderItem({item}){
         return (
           <View style={{
               // backgroundColor:'red',
@@ -270,7 +270,7 @@ const{width,height} =Dimensions.get("screen")
             <View style={{ flex: 1,
               backgroundColor:themeColor,
              }}>
-               {/* <StatusBar /> */}
+               <StatusBar />
                 <View>
                 <Carousel
                   layout={"default"}

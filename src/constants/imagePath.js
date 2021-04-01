@@ -1,4 +1,4 @@
-export default {profile:require('../assets/images/profile.jpeg'),
+export default {profile:require('../assets/images/profile.png'),
 rightArrow:require('../assets/images/rightArrow.png'),
 calenderImage:require('../assets/images/calenderImage.png'),
 leftArrow:require('../assets/images/leftArrow.png'),
@@ -28,5 +28,6 @@ item8:require('../assets/images/item8.jpeg'),
 shoppingBag:require('../assets/images/shopingBag.png'),
 consultImage:require('../assets/images/consultImage.png'),
 sentImage:require('../assets/images/sentImage.png'),
-heartImage:require('../assets/images/heartImage.png')
+heartImage:require('../assets/images/heartImage.png'),
+search:require('../assets/images/search.png')
 }

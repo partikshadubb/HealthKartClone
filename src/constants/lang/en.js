@@ -63,5 +63,5 @@ export default {
     SIGNUP_AGREEMENT_TEXT:"By signing up you agree to our",
     TERMS_AND_CONDITIONS:"Terms & Conditions",
     VERIFY_NUMBER:"VERIFY NUMBER",
-    
+    SEARCH:"Search",
 }

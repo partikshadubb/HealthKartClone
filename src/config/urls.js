@@ -6,3 +6,4 @@ export const UPLOAD_IMAGE = getApiUrl('/common/uploadFile')
 export const OTP_RECIEVE =" https://api.talktier.com/user/v1/loginSignupOtp";
 export const OTP_VARIFY ="  https://api.talktier.com/user/v1/verifyOtp";
 export const INFINITE_LIST= "https://api.talktier.com/user/v1/getUserSearch ";
+export const SEARCH = "https://api.talktier.com/user/v1/getUserNearMe";

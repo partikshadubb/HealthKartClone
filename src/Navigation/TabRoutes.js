@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Cart, HomePage, Profile, LatestDeals} from '../Screen/index';
+import {Cart, HomePage, Profile, LatestDeals, Search} from '../Screen/index';
 import navigationStrings from '../constants/navigationStrings';
 import colors from '../styles/colors';
 import {color} from 'react-native-reanimated';
@@ -48,6 +48,23 @@ function TabRoutes(props) {
         }}
       />
 
+<Tab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarLabel: 'Search',
+          tabBarIcon: ({focused}) => {
+            return (
+              <Image
+                style={{height: 22, width: 22,tintColor: focused ? themeColor: (colors.darkGrey) }}
+                source={imagePath.search}
+              />
+            );
+          },
+        }}
+      />
+
+
       <Tab.Screen
         name="Cart"
         component={Cart}
@@ -56,11 +73,8 @@ function TabRoutes(props) {
           tabBarIcon: ({focused}) => {
             return (
               <Image
-                style={{height: 22, width: 22, tintColor: focused ? themeColor: (colors.darkGrey) }}
-                source={{
-                  uri:
-                    'https://img.icons8.com/pastel-glyph/2x/shopping-cart--v2.png',
-                }}
+                style={{height: 23, width: 23, tintColor: focused ? themeColor: (colors.darkGrey) }}
+                source={imagePath.cart}
               />
             );
           },
@@ -75,14 +89,13 @@ function TabRoutes(props) {
             return (
               <Image
                 style={{height: 22, width: 22,tintColor: focused ? themeColor: (colors.darkGrey) }}
-                source={{
-                  uri: 'https://static.thenounproject.com/png/1367727-200.png',
-                }}
+                source={imagePath.profile}
               />
             );
           },
         }}
       />
+
     </Tab.Navigator>
   );
 }

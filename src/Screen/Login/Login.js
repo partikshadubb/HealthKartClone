@@ -13,7 +13,6 @@ import commonStyles from '../../styles/commonStyles';
 import fontFamily from '../../styles/fontFamily';
 import {moderateScale,moderateScaleVertical} from '../../styles/responsiveSize'
 import api from '../../redux/actions';
-import { getUserData } from '../../utils/utils';
 import {showMessage} from 'react-native-flash-message'
  import validator from '../../utils/validations';
 import { color } from 'react-native-reanimated';

@@ -24,6 +24,7 @@ import SnapCarousel from '../../Component/SnapCarousel';
 import {connect} from 'react-redux'
 import { clearUserData } from '../../utils/utils';
 import styles from './styles';
+import SearchBar1 from '../../Component/SearchBar1';
 
 
 const {dispatch} = store;
@@ -223,27 +224,7 @@ changeTheme=()=>{
 
 
 <View style={{backgroundColor:colors.white,paddingVertical:10}}>
-<View style={styles.searchBar}>
-            <TextInput
-              style={{ marginLeft: 35, fontSize: 15, }}
-              placeholder="Search for Products, Brands and More"
-            />
-
-            <Image
-              style={styles.searchIcon}
-              source={{
-                uri:
-                  "https://images.vexels.com/media/users/3/132068/isolated/preview/f9bb81e576c1a361c61a8c08945b2c48-search-icon-by-vexels.png",
-              }}
-            />
-            <Image
-              style={styles.voiceIcon}
-              source={{
-                uri:
-                  "https://www.materialui.co/materialIcons/hardware/keyboard_voice_grey_192x192.png",
-              }}
-            />
-          </View>
+  <SearchBar1/>
           </View>
 <ScrollView>
 <SnapCarousel/>

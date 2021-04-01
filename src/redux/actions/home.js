@@ -6,8 +6,8 @@
 // }
 
 import { reject } from 'lodash';
-import {INFINITE_LIST, LOGIN, SIGNUP} from '../../config/urls';
-import {apiPost, setUserData} from "../../utils/utils";
+import {INFINITE_LIST, LOGIN, SEARCH, SIGNUP} from '../../config/urls';
+import {apiGet, apiPost, setUserData} from "../../utils/utils";
 import store from '../store';
 import types from '../types';
 const {dispatch}=store;
@@ -52,24 +52,10 @@ export function  deleteList(id){
   
 }
 
-export function infiniteScroll(data ={}){
-  return new Promise((resovle,reject)=>
-  {
-    apiPost(INFINITE_LIST, data).then(res=>{
-      resovle(res)
-      console.log(res.data,"inAction Infinite")
-      
-     dispatch({
-       type:types.INFINITE_LIST,
-       payload:res.data
-     })
-     
-     
-    }).catch(error=>
-    {
-  reject(error)
-    })
-  })
-}
 
+
+export function search(search){
+  let searchUrl = `${SEARCH}` + `?name=${search}`
+ return apiGet(searchUrl)
+}
   

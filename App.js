@@ -24,9 +24,8 @@ class App extends Component {
       actions.saveUserData(res);
       setTimeout(()=>{
         SplashScreen.hide()
-      },3000)
+      },1000)
      console.log(res,"in app .....................")
-    //  this.setState({userData:userInfo})
     })
    
     
