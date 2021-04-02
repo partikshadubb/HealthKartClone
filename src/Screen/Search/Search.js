@@ -42,6 +42,12 @@ apicall=()=>{
 getSearchValue =(search) =>
 {
   this.setState({search:search})
+if (this.searchTimeOut) {
+    clearTimeout(this.searchTimeOut)
+}
+  this.searchTimeOut = setTimeout(() => {
+     this.apicall();
+  }, 600);
   console.log(search)
 }
 
@@ -148,12 +154,12 @@ _renderItem = searchData =>{
   <SearchBar1 onChangeText={this.getSearchValue} value={search} onPress={this.apicall}/>
           </View>
 
-<Loader isLoading={isLoading}/>
+
 <FlatList
  data={searchData}
  renderItem={item => this._renderItem(item)}
 />
-
+<Loader isLoading={isLoading}/>
             </View>
         );
     }

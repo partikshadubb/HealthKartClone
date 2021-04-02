@@ -5,13 +5,10 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
-  StyleSheet,
-  Touchable,
+ 
 } from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
 import {connect} from 'react-redux';
 import imagePath from '../../constants/imagePath';
-import navigationStrings from '../../constants/navigationStrings';
 import actions from '../../redux/actions';
 import store from '../../redux/store';
 import colors from '../../styles/colors';
@@ -142,7 +139,7 @@ const {themeColor}=this.props
     const {themeColor}=this.props 
     console.log(this.props.price, 'totalPrice');
     return (
-      <View>
+      <View style={styles.container}>
         <View style={styles.navSignup}>
           <Text style={{fontFamily: fontFamily.bold,
     fontSize: 20,color:themeColor}}>{strings.CART}</Text>
@@ -162,12 +159,13 @@ const {themeColor}=this.props
     backgroundColor: themeColor}} >{strings.PLACE_ORDERS}</Text>
             </TouchableOpacity>
           </View>
-          <FlatList
+         
+        </View>
+        <FlatList
             data={cartList}
             renderItem={this._renderItem}
             keyExtractor={item => item.id}
           />
-        </View>
       </View>
     );
   }

@@ -30,13 +30,18 @@ export default function (state=initialState,action) {
 
 
        case types.DELETE_LIST:
+           let newPrice = 0
         let newObject =[...state.cartList];
         console.log(action.payload,"homeList")
         let items = newObject.filter(item=>item.id !== action.payload);  
+        for(let i = 0; i < items.length ; i++){
+            newPrice = newPrice + items[i].reducedPrice
+                        console.log(total,"this is new ")
+        }
               return{
             ...state,
             cartList : items,
-           
+            price:newPrice
         }
 
 
