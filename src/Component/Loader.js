@@ -17,6 +17,7 @@ export default function Loader({isLoading}) {
 const styles=StyleSheet.create({
   view:{
     position: 'absolute',
+   
     top: 0,
     right: 0,
     left: 0,

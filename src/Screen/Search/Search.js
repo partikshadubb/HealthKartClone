@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet ,Image,FlatList} from 'react-native';
+import { View, Text, StyleSheet ,Image,FlatList, Button,ActivityIndicator} from 'react-native';
 import { connect } from 'react-redux';
 import StatusBar from '../../Component/StatusBar';
 import strings from '../../constants/lang';
@@ -12,7 +12,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import api from '../../redux/actions'
 import actions from '../../redux/actions';
 import Loader from '../../Component/Loader';
-
+import ButtonWithLoader from '../../Component/ButtonWithLoader';
+import Geolocation from 'react-native-geolocation-service';
+import { locationPermission } from '../../utils/permissions';
 
 // create a component
 class Search extends Component {
@@ -23,18 +25,22 @@ constructor(props){
         searchData:[],
         isLoading:false,
         timeout:null,
+        getUserLocation:false,
+        serchingLoader:false,
+        
     }
 }
 
 apicall=()=>{
     const{ search}=this.state
-    this.setState({isLoading:true})
+    this.setState({searchingLoader:true})
     actions.search(search)
     .then(res=>{
         console.log(res.data,"search")
-        this.setState({searchData:[...res.data],isLoading:false})
+        this.setState({searchData:[...res.data],searchingLoader:false})
       })
       .catch(err=>{
+        this.setState({searchingLoader:false})
         console.log(err)
       })
 }
@@ -49,6 +55,55 @@ if (this.searchTimeOut) {
      this.apicall();
   }, 600);
   console.log(search)
+}
+
+searchLoader=()=>{
+  const{searchingLoader}=this.state
+  return (
+  <View style={{position:"absolute",right:20,top:18}}>
+      {searchingLoader ? (
+        <ActivityIndicator size={'small'} color={colors.red}  />
+      ) : null}
+   </View>
+  );
+
+}
+
+buttonLoader = () => {
+  const {isLoading} = this.state;
+  return (
+    <View style={styles.footer}>
+      {isLoading ? (
+        <ActivityIndicator size={'large'} color={colors.red} style={{margin: 15}} />
+      ) : null}
+    </View>
+  );
+};
+
+nearLoaction=()=>{
+  locationPermission().then(res=>{
+    Geolocation.getCurrentPosition(
+        (position) => {
+          console.log(position.coords.latitude);
+          const{latitude,longitude}=position.coords
+          this.setState({isLoading:true})
+           actions.userLocation(latitude,longitude) 
+           .then(res=>{
+            console.log(res.data,"location")
+            this.setState({searchData:res.data,isLoading:false})
+          })
+          .catch(err=>{
+            this.setState({isLoading:false})
+            console.log(err)
+          })
+          },
+        (error) => {
+          // See error code charts below.
+          console.log(error.code, error.message);
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+    );
+  })
 }
 
 _renderItem = searchData =>{
@@ -133,7 +188,7 @@ _renderItem = searchData =>{
 
     render() {
         const {themeColor}=this.props
-         const {search,searchData,isLoading}=this.state
+         const {search,searchData,isLoading,getUserLocation,searchingLoader}=this.state
         return (
             <View style={styles.container}>
                <StatusBar bgColor={themeColor}/>
@@ -143,15 +198,31 @@ _renderItem = searchData =>{
           <Text style={{ fontFamily:fontFamily.bold,
     fontSize: 20,color:themeColor}}>{strings.SEARCH}</Text>
          
-         <TouchableOpacity onPress={()=>this.props.navigation.goBack()}>
-          <Image
-            style={styles.arrowImage}
-            source={imagePath.crossImage}
-          />
+         <TouchableOpacity onPress={()=>this.setState({getUserLocation : !getUserLocation,searchData:[]})} >
+          <View>
+            <Text style={{padding:10,backgroundColor:themeColor,color:colors.white,borderRadius:15}}>Location</Text>
+          </View>
           </TouchableOpacity>
         </View>
-        <View style={{backgroundColor:colors.white,paddingVertical:10}}>
-  <SearchBar1 onChangeText={this.getSearchValue} value={search} onPress={this.apicall}/>
+        <View style={{backgroundColor:colors.white,paddingVertical:10,position:'relative'}}>
+       {!getUserLocation ?
+       
+<>
+<SearchBar1 onChangeText={this.getSearchValue} value={search}  />
+{this.searchLoader()}
+</>
+       
+       :
+       <>
+        <ButtonWithLoader btnText="Near By Location"
+        borderColor={themeColor}
+        btnTextStyle={20}
+        color={themeColor}
+        btnStyle={styles.buttonStyle} 
+        onPress={this.nearLoaction}/>
+        {this.buttonLoader()}
+      </>
+    }
           </View>
 
 
@@ -159,7 +230,7 @@ _renderItem = searchData =>{
  data={searchData}
  renderItem={item => this._renderItem(item)}
 />
-<Loader isLoading={isLoading}/>
+{/* <Loader isLoading={isLoading}/> */}
             </View>
         );
     }
@@ -192,6 +263,18 @@ const styles = StyleSheet.create({
         margin: 8,
         borderWidth: 1,
         borderColor: colors.lightGrey,
+      },
+      buttonStyle:{
+        borderWidth:3,
+        width:300,
+        alignSelf:"center",
+        marginTop:-5
+      },
+      footer: {
+        padding: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
       },
 })
 const mapStateToProps = state =>{

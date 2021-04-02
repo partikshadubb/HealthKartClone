@@ -24,7 +24,7 @@ class App extends Component {
       actions.saveUserData(res);
       setTimeout(()=>{
         SplashScreen.hide()
-      },1000)
+      },100)
      console.log(res,"in app .....................")
     })
    

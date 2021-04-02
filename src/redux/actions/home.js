@@ -55,7 +55,12 @@ export function  deleteList(id){
 
 
 export function search(search){
-  let searchUrl = `${SEARCH}` + `?name=${search}`
+  let searchUrl = SEARCH + `?name=${search}`
  return apiGet(searchUrl)
+}
+  
+export function userLocation(latitude,longitude){
+  let locationUrl = SEARCH + `?coordinates=["${longitude}","${latitude}"]`
+ return apiGet(locationUrl)
 }
   

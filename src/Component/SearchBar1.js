@@ -35,7 +35,7 @@ export default function({onChangeText,value,onPress=()=>{}}) {
             />
             </TouchableOpacity>
             </View> */}
-            <View style = {{position: "absolute",top:0, right: 10,height: 30,
+            {/* <View style = {{position: "absolute",top:0, right: 10,height: 30,
              width: 30,justifyContent:"center",alignItems:"center"}}>
               <TouchableOpacity
               onPress = {onPress}
@@ -49,7 +49,7 @@ export default function({onChangeText,value,onPress=()=>{}}) {
               }}
             />
               </TouchableOpacity>
-            </View>
+            </View> */}
           </View>
     )
 }
