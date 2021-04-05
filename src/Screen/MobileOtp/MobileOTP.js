@@ -128,7 +128,7 @@ this.props.navigation.navigate(navigationStrings.OTP_SCREEN,{userId:this.state.u
   <ButtonWithLoader btnText={strings.VERIFY_NUMBER} btnTextStyle={20} btnStyle={styles.buttonStyle} bgColor={themeColor} onPress={()=>this.isValidData()}/>
 </View>
 
-<Loader isLoading={isLoading}/>
+
 
 <View style={styles.socialRow}>
             <View style={styles.hyphen} />
@@ -178,7 +178,7 @@ this.props.navigation.navigate(navigationStrings.OTP_SCREEN,{userId:this.state.u
           </Text>
         </View>
         </ScrollView>
-
+        <Loader isLoading={isLoading}/>
 </View>
          
        

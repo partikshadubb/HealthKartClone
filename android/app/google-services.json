@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "167924140150",
+    "project_id": "healthkart-6add0",
+    "storage_bucket": "healthkart-6add0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167924140150:android:2660972700b71050263757",
+        "android_client_info": {
+          "package_name": "com.healthkart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167924140150-da31h4ode149rfhnt39jvj3qlbs2a2dq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCohmbNA_NyakCeifvC75MHAJPENVXeQjA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167924140150-da31h4ode149rfhnt39jvj3qlbs2a2dq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167924140150:android:098b1ebfcd42541b263757",
+        "android_client_info": {
+          "package_name": "com.hkc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167924140150-da31h4ode149rfhnt39jvj3qlbs2a2dq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCohmbNA_NyakCeifvC75MHAJPENVXeQjA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167924140150-da31h4ode149rfhnt39jvj3qlbs2a2dq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

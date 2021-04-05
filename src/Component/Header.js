@@ -8,28 +8,28 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native-gesture-handler';
-import ButtonWithLoader from './ButtonWithLoader'
-import { height } from '../styles/responsiveSize'
- function Header(props) {
-    const{navigation,onLogout,changeTheme}=props
-    console.log(props.themeColor.themeColor,"headerColor")
-    const{themeColor}=props
+ function Header({
+   menuPress,
+  newColor}) {
+    console.log(newColor)
     return(
         <View style={styles.navbar}>
         <View
-          style={{ flexDirection: "row",height:50, justifyContent: "space-between",alignItems:"center" }}
+          style={{ flexDirection: "row",height:50,
+           justifyContent: "space-between",alignItems:"center" }}
         >
-          <View style={{ flexDirection: "row",justifyContent:"center",alignItems:"center" }}>
-            <TouchableOpacity onPress={()=>onLogout()}>
+          <View style={{ flexDirection: "row",
+          justifyContent:"center",alignItems:"center" }}>
+            <TouchableOpacity onPress={menuPress} >
              
             <Image
-              style={{ height: 20, width: 30 ,tintColor:themeColor}}
+              style={{ height: 20, width: 30 ,tintColor:newColor}}
               source={imagePath.menu}
             />
             </TouchableOpacity>
-            <Text style={{color:themeColor ,fontSize:20,marginLeft:10}}>
+            <Text style={{color:newColor ,fontSize:20,marginLeft:10}}>
               HEALT
-              <Text style={{backgroundColor:themeColor ,color:colors.white}}>HK</Text>ART</Text>
+              <Text style={{backgroundColor:newColor ,color:colors.white}}>HK</Text>ART</Text>
           </View>
          
          {/* <TouchableOpacity  onPress={()=>changeTheme()} >

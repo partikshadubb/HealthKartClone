@@ -15,8 +15,7 @@ const Stack=createStackNavigator();
     return(
         <NavigationContainer>
             <Stack.Navigator>
-            {!userData.accessToken &&  AuthStack()}
-        {MainStack()}
+        {!!userData.accessToken?MainStack():AuthStack()}
                 
                
             </Stack.Navigator>

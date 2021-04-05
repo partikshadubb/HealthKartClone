@@ -25,6 +25,7 @@ import {connect} from 'react-redux'
 import { clearUserData } from '../../utils/utils';
 import styles from './styles';
 import SearchBar1 from '../../Component/SearchBar1';
+import DrawerContent from '../../Component/DrawerContent';
 
 
 const {dispatch} = store;
@@ -201,7 +202,6 @@ const {dispatch} = store;
 
   onLogout = () => {
     actions.logout()
-    this.props.navigation.navigate(navigationStrings.LOGIN)
 
   }
 
@@ -209,6 +209,10 @@ changeTheme=()=>{
   const {themeColor}=this.state
   actions.switchTheme(themeColor)
   
+}
+openDrawer = () => {
+  const { navigation } = this.props;
+  navigation.openDrawer();
 }
 
   render() {
@@ -219,8 +223,7 @@ changeTheme=()=>{
     return (
       <View style={{flex: 1,backgroundColor:colors.white}}>
         <StatusBar bgColor={themeColor}/>
-        <Header navigation={this.props.navigation} onLogout={this.onLogout} changeTheme={this.changeTheme} />
-       
+        <Header menuPress={this.openDrawer} newColor={themeColor} />
 
 
 <View style={{backgroundColor:colors.white,paddingVertical:10}}>

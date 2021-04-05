@@ -19,7 +19,7 @@ import { color } from 'react-native-reanimated';
 import strings from '../../constants/lang';
 import { connect } from 'react-redux';
 // import MobileOTP from '../MobileOtp/MobileOTP';
-
+import {AccessToken,LoginManager} from 'react-native-fbsdk'
 
 
 // create a component
@@ -74,7 +74,30 @@ class Login extends Component {
              return true; 
            };
         
+// facebookLogin=()=>{
+//   LoginManager.logInWithPermissions(["public_profile"]).then(
+//     function(result) {
+//       if (result.isCancelled) {
+//         console.log("Login cancelled");
+//       } else {
+//         AccessToken.getCurrentAccessToken().then(data => {
+//           const accessToken = data.accessToken.toString();
+//           this.getInfoFromToken(accessToken);
+//         });
+//         console.log(
+//           "Login success with permissions: " +
+//             result.grantedPermissions.toString()
+//         );
+//       }
+//     },
+//     function(error) {
+//       console.log("Login fail with error: " + error);
+//     }
+//   );
+    
+// }
 
+           
   render() {
 
     const {themeColor}=this.props
@@ -157,7 +180,7 @@ marginRight:15,paddingHorizontal:5}}>
           </View>
             
           <View style={styles.socialIconView}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress= {()=>this.facebookLogin()}>
               <View
                 style={styles.iconView}
               >
@@ -192,6 +215,9 @@ marginRight:15,paddingHorizontal:5}}>
             </Text>
           </Text>
         </View>
+        <View>
+       
+      </View>
         </ScrollView>
 
 </View>

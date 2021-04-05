@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Cart, HomePage, Profile, LatestDeals, Search} from '../Screen/index';
+import {Cart, HomePage, Profile, LatestDeals, Search, Charts} from '../Screen/index';
 import navigationStrings from '../constants/navigationStrings';
 import colors from '../styles/colors';
 import {color} from 'react-native-reanimated';
@@ -95,6 +95,7 @@ function TabRoutes(props) {
           },
         }}
       />
+
 
     </Tab.Navigator>
   );

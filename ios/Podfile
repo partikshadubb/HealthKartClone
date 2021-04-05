@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'HealthKart' do
+target 'hkc' do
   config = use_native_modules!
 
   use_react_native!(
@@ -12,7 +12,11 @@ target 'HealthKart' do
     :hermes_enabled => false
   )
 
-  target 'HealthKartTests' do
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+  target 'hkcTests' do
     inherit! :complete
     # Pods for testing
   end

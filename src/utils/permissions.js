@@ -1,5 +1,7 @@
 import {PermissionsAndroid, Platform, Alert} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
+import messaging from '@react-native-firebase/messaging';
+
 export const androidCameraPermission = () =>
   new Promise(async (resolve, reject) => {
     try {
@@ -43,6 +45,32 @@ export const androidCameraPermission = () =>
 
 //   return Promise.resolve('granted');
 // };
+export const  requestUserPermission = async ()=> {
+  const authStatus = await messaging().requestPermission();
+  const enabled =
+    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+  if (enabled) {
+    console.log('Authorization status:', authStatus);
+    getFcmToken()
+  }
+}
+
+getFcmToken = async () => {
+  const fcmToken = await messaging().getToken();
+
+  if (fcmToken) {
+    console.log(fcmToken, 'fcm token');
+
+    this.showAlert('Your Firebase Token is:', fcmToken);
+  } else {
+    this.showAlert('Failed', 'No token received');
+  }
+};
+
+
+
 
 
 export const locationPermission = () => new Promise(async (resolve, reject) => {

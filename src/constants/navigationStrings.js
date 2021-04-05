@@ -13,4 +13,7 @@ export default {
     MOBILEOTP:'mobileOtp',
     OTP_SCREEN:'otpScreen',
     SEARCH:'search',
+    DRAWER: "drawer",
+    CHARTS:"charts",
+    NOTIFICATIONS:"notification"
 }

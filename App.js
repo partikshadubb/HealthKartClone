@@ -8,7 +8,8 @@ import store from './src/redux/store';
 import {getUserData} from '././src/utils/utils'
 import actions from './src/redux/actions';
 import types from './src/redux/types';
-import SplashScreen from 'react-native-splash-screen'
+import SplashScreen from 'react-native-splash-screen';
+import {requestUserPermission} from './src/utils/permissions';
 // create a component
 class App extends Component {
   constructor(props){
@@ -27,7 +28,7 @@ class App extends Component {
       },100)
      console.log(res,"in app .....................")
     })
-   
+    requestUserPermission()
     
   }
 
