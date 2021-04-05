@@ -10,8 +10,9 @@ import {
 } from 'react-native-gesture-handler';
  function Header({
    menuPress,
-  newColor}) {
+  newColor,cartPress}) {
     console.log(newColor)
+    
     return(
         <View style={styles.navbar}>
         <View
@@ -38,7 +39,7 @@ import {
            
             <TouchableOpacity
               //{newItem:cartArray, price:price }
-              onPress={()=>navigation.navigate('Cart')}
+              onPress={cartPress}
             >
               <Image
                 style={{ height: 27, width: 27 ,marginHorizontal:10}}

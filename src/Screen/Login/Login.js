@@ -74,29 +74,24 @@ class Login extends Component {
              return true; 
            };
         
-// facebookLogin=()=>{
-//   LoginManager.logInWithPermissions(["public_profile"]).then(
-//     function(result) {
-//       if (result.isCancelled) {
-//         console.log("Login cancelled");
-//       } else {
-//         AccessToken.getCurrentAccessToken().then(data => {
-//           const accessToken = data.accessToken.toString();
-//           this.getInfoFromToken(accessToken);
-//         });
-//         console.log(
-//           "Login success with permissions: " +
-//             result.grantedPermissions.toString()
-//         );
-//       }
-//     },
-//     function(error) {
-//       console.log("Login fail with error: " + error);
-//     }
-//   );
-    
-// }
-
+           facebookLogin = () => {
+            LoginManager.logInWithPermissions(['public_profile']).then(
+              login => {
+                if (login.isCancelled) {
+                  console.log('Login cancelled');
+                } else {
+                  AccessToken.getCurrentAccessToken().then(data => {
+                    const accessToken = data.accessToken.toString();
+                    console.log(accessToken,"facebook")
+                    // this.getInfoFromToken(accessToken);
+                  });
+                }
+              },
+              error => {
+                console.log('Login fail with error: ' + error);
+              },
+            );
+          };
            
   render() {
 

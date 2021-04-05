@@ -26,6 +26,7 @@ import { clearUserData } from '../../utils/utils';
 import styles from './styles';
 import SearchBar1 from '../../Component/SearchBar1';
 import DrawerContent from '../../Component/DrawerContent';
+import { Cart } from '..';
 
 
 const {dispatch} = store;
@@ -223,7 +224,7 @@ openDrawer = () => {
     return (
       <View style={{flex: 1,backgroundColor:colors.white}}>
         <StatusBar bgColor={themeColor}/>
-        <Header menuPress={this.openDrawer} newColor={themeColor} />
+        <Header menuPress={this.openDrawer} cartPress={()=>this.props.navigation.navigate("Cart")} newColor={themeColor} />
 
 
 <View style={{backgroundColor:colors.white,paddingVertical:10}}>
