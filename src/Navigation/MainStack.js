@@ -2,7 +2,7 @@ import React from "react";
 import {createStackNavigator} from '@react-navigation/stack'
 import TabRoutes from  "../Navigation/TabRoutes";
 import navigationStrings from "../constants/navigationStrings";
-import { Charts, MobileOTP, NotificationsScreen } from "../Screen";
+import { Charts, Generator, ImageScreen, MobileOTP, NotificationsScreen } from "../Screen";
 import DrawerNavigation from "./DrawerNavigation";
 const Stack=createStackNavigator();
 export default function(){
@@ -30,6 +30,20 @@ export default function(){
         headerShown:false
       }}
       component={NotificationsScreen}
+    />
+<Stack.Screen
+      name={navigationStrings.IMAGE_SCREEN}
+      options={{
+        headerShown:false
+      }}
+      component={ImageScreen}
+    />
+<Stack.Screen
+      name={navigationStrings.GENERATOR}
+      options={{
+        headerShown:false
+      }}
+      component={Generator}
     />
       </>
   )

@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { color } from "react-native-reanimated";
 import { connect } from "react-redux";
+import navigationStrings from "../constants/navigationStrings";
 import DetailPage from "../Screen/DetailPage/DetailPage";
 import colors from "../styles/colors";
 
@@ -50,9 +51,13 @@ const {themeColor}=props
                 justifyContent: "center",
               }}
             >
+              <TouchableOpacity
+               onPress={()=>navigation.navigate(navigationStrings.IMAGE_SCREEN,
+               item={item})} >
               <View>
                 <Image style={{ height: 190,resizeMode:"contain",width:"100%" }} source={ image } />
               </View>
+              </TouchableOpacity>
               <Text
                 style={{
                   fontSize: 13,

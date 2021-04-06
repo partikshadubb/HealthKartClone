@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,Image,TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet,Image,TouchableOpacity,Dimensions } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import { BorderlessButton, ScrollView } from 'react-native-gesture-handler';
 import ButtonWithLoader from '../../Component/ButtonWithLoader';
-import IconTextRow from '../../Component/IconTextRow';
 import StatusBar from '../../Component/StatusBar';
 import TextInputWithLabel from '../../Component/TextInputWithLabel';
 import imagePath from '../../constants/imagePath';
@@ -15,12 +14,10 @@ import {moderateScale,moderateScaleVertical} from '../../styles/responsiveSize'
 import api from '../../redux/actions';
 import {showMessage} from 'react-native-flash-message'
  import validator from '../../utils/validations';
-import { color } from 'react-native-reanimated';
 import strings from '../../constants/lang';
 import { connect } from 'react-redux';
 // import MobileOTP from '../MobileOtp/MobileOTP';
 import {AccessToken,LoginManager} from 'react-native-fbsdk'
-
 
 // create a component
 class Login extends Component {
@@ -84,6 +81,7 @@ class Login extends Component {
                     const accessToken = data.accessToken.toString();
                     console.log(accessToken,"facebook")
                     // this.getInfoFromToken(accessToken);
+                    this.props.navigation.navigate(navigationStrings.TAB_ROUTES)
                   });
                 }
               },

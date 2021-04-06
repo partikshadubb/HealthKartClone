@@ -15,5 +15,7 @@ export default {
     SEARCH:'search',
     DRAWER: "drawer",
     CHARTS:"charts",
-    NOTIFICATIONS:"notification"
+    NOTIFICATIONS:"notification",
+    IMAGE_SCREEN:"imagescreen",
+    GENERATOR:"generator",
 }

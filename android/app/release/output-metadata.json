@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.healthkart",
+  "applicationId": "com.hkc",
   "variantName": "processReleaseResources",
   "elements": [
     {

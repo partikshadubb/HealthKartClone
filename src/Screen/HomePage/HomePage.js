@@ -1,20 +1,13 @@
 import React, {Component} from 'react';
-import {View, Text, Image, StyleSheet,TextInput} from 'react-native';
+import {View, Text, Image, StyleSheet,TextInput,Dimensions} from 'react-native';
 import {
   FlatList,
   ScrollView,
   TouchableOpacity,
 } from 'react-native-gesture-handler';
-import DetailPage from '../DetailPage/DetailPage';
-import {createStackNavigator} from '@react-navigation/stack';
 import HomeStyle from '../../Component/HomeStyle';
 import imagePath from '../../constants/imagePath';
-import {createStore} from 'redux';
-import reducers from '../../redux/reducers/homeList';
-import {addList} from '../../redux/actions/auth';
 import store from '../../redux/store';
-import navigationStrings from '../../constants/navigationStrings';
-import types from '../../redux/types';
 import colors from '../../styles/colors';
 import StatusBar from '../../Component/StatusBar';
 import actions from '../../redux/actions';
@@ -22,11 +15,9 @@ import Header from '../../Component/Header';
 import SearchBar from '../../Component/SearchBar';
 import SnapCarousel from '../../Component/SnapCarousel';
 import {connect} from 'react-redux'
-import { clearUserData } from '../../utils/utils';
-import styles from './styles';
 import SearchBar1 from '../../Component/SearchBar1';
-import DrawerContent from '../../Component/DrawerContent';
-import { Cart } from '..';
+import ImageZoom from 'react-native-image-pan-zoom';
+
 
 
 const {dispatch} = store;
@@ -231,6 +222,15 @@ openDrawer = () => {
   <SearchBar1/>
           </View>
 <ScrollView>
+
+{/* <ImageZoom cropWidth={Dimensions.get('window').width}
+                       cropHeight={Dimensions.get('window').height}
+                       imageWidth={200}
+                       imageHeight={200}>
+                <Image style={{width:200, height:200}}
+                       source={imagePath.item3}/>
+            </ImageZoom> */}
+
 <SnapCarousel/>
 
         <View style={{flex: 1}}>

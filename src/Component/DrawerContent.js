@@ -56,9 +56,15 @@ function DrawerContent(props) {
               }}
             />
             <DrawerItem
-              label="Notifications"
+              label="Scaner"
               onPress={() => {
                 navigation.navigate(navigationStrings.NOTIFICATIONS);
+              }}
+            />
+<DrawerItem
+              label="QR Generator"
+              onPress={() => {
+                navigation.navigate(navigationStrings.GENERATOR);
               }}
             />
 
