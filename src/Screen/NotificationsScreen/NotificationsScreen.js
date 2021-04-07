@@ -12,17 +12,20 @@ import {
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
+import colors from '../../styles/colors';
 
 export default class NotificationsScreen extends Component {
   onSuccess = e => {
     Linking.openURL(e.data).catch(err =>
       console.error('An error occured', err)
     );
+    Linking.addListener(alert(e.data))
   };
 
   render() {
     return (
       <QRCodeScanner
+      showMarker={true}
         onRead={this.onSuccess}
         flashMode={RNCamera.Constants.FlashMode.torch}
         topContent={

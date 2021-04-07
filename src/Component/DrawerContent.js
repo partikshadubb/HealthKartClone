@@ -67,6 +67,12 @@ function DrawerContent(props) {
                 navigation.navigate(navigationStrings.GENERATOR);
               }}
             />
+            <DrawerItem
+              label="Chats"
+              onPress={() => {
+                navigation.navigate(navigationStrings.CHATS);
+              }}
+            />
 
             <DrawerItem label="Settings" />
             <DrawerItem label="Support" />

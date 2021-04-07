@@ -2,7 +2,7 @@ import React from "react";
 import {createStackNavigator} from '@react-navigation/stack'
 import TabRoutes from  "../Navigation/TabRoutes";
 import navigationStrings from "../constants/navigationStrings";
-import { Charts, Generator, ImageScreen, MobileOTP, NotificationsScreen } from "../Screen";
+import { Charts, Chats, Generator, ImageScreen, MobileOTP, NotificationsScreen } from "../Screen";
 import DrawerNavigation from "./DrawerNavigation";
 const Stack=createStackNavigator();
 export default function(){
@@ -44,6 +44,13 @@ export default function(){
         headerShown:false
       }}
       component={Generator}
+    />
+    <Stack.Screen
+      name={navigationStrings.CHATS}
+      options={{
+        headerShown:false
+      }}
+      component={Chats}
     />
       </>
   )

@@ -5,14 +5,18 @@ import QRCode from 'react-native-qrcode-svg';
 
 // create a component
 class Generator extends Component {
-
+  state={
+      value:{name:"Partisha Dubb",dob:'12-10-1997',occp:'vehly'}
+  }
 
 
 
   render() {
+      const{value}=this.state
+      let newValue=JSON.stringify(value)
     return (
       <View style={styles.container}>
-        <QRCode value="http://awesome.link.qr" />
+        <QRCode value={newValue} />
       </View>
     );
   }

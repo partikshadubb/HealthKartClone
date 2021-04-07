@@ -18,4 +18,5 @@ export default {
     NOTIFICATIONS:"notification",
     IMAGE_SCREEN:"imagescreen",
     GENERATOR:"generator",
+    CHATS:"chats",
 }

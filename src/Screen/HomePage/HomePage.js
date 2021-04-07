@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, Image, StyleSheet,TextInput,Dimensions} from 'react-native';
+import {View, Text,} from 'react-native';
 import {
   FlatList,
   ScrollView,
@@ -12,12 +12,9 @@ import colors from '../../styles/colors';
 import StatusBar from '../../Component/StatusBar';
 import actions from '../../redux/actions';
 import Header from '../../Component/Header';
-import SearchBar from '../../Component/SearchBar';
 import SnapCarousel from '../../Component/SnapCarousel';
 import {connect} from 'react-redux'
 import SearchBar1 from '../../Component/SearchBar1';
-import ImageZoom from 'react-native-image-pan-zoom';
-
 
 
 const {dispatch} = store;
