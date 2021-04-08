@@ -70,7 +70,7 @@ function DrawerContent(props) {
             <DrawerItem
               label="Chats"
               onPress={() => {
-                navigation.navigate(navigationStrings.CHATS);
+                navigation.navigate(navigationStrings.ALL_USERS);
               }}
             />
 

@@ -7,10 +7,10 @@ import {showError} from './helperFunctions';
 
 export async function getHeaders() {
   let userData = await AsyncStorage.getItem('userData');
-  console.log(userData, 'the user data value ');
+  console.log(userData, 'the user data value ,utils');
   if (userData) {
     userData = JSON.parse(userData);
-    console.log(userData.token, 'header');
+    console.log(userData.token, 'header,utils');
     return {
       authorization: `Bearer ${userData.accessToken}`,
     };

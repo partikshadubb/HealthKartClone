@@ -6,7 +6,7 @@
 // }
 
 import { reject } from 'lodash';
-import {INFINITE_LIST, LOGIN, SEARCH, SIGNUP} from '../../config/urls';
+import {CHAT_USER, INFINITE_LIST, LOGIN, SEARCH, SIGNUP, USER_CONVERSATION} from '../../config/urls';
 import {apiGet, apiPost, setUserData} from "../../utils/utils";
 import store from '../store';
 import types from '../types';
@@ -63,4 +63,13 @@ export function userLocation(latitude,longitude){
   let locationUrl = SEARCH + `?coordinates=["${longitude}","${latitude}"]`
  return apiGet(locationUrl)
 }
-  
+ 
+export function chatUser(limit,skip){
+  let chatUserUrl = CHAT_USER + `?limit=`+limit+ `&skip=`+skip
+  return apiGet(chatUserUrl)
+}
+
+export function userConversation (id,limit){
+  let userConversationUrl = USER_CONVERSATION + `?commonConversationId=`+id+ `&limit=`+limit
+  return apiGet(userConversationUrl)
+}

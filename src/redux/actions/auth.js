@@ -50,7 +50,7 @@ export function mobileOtpVerification(data = {}){
   return new Promise((resovle,reject)=>
   {
     apiPost(OTP_RECIEVE, data).then(res=>{
-      // setUserData(res.data);
+      setUserData(res.data);
       resovle(res)
     }).catch(error=>
     {

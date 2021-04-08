@@ -15,3 +15,4 @@ export {default as NotificationsScreen} from "./NotificationsScreen/Notification
 export {default as ImageScreen} from "./ImageScreen/ImageScreen"
 export {default as Generator} from "./Generator/Generator"
 export {default as Chats} from "./Chats/Chats"
+export {default as AllUsers} from "./AllUsers/AllUsers"

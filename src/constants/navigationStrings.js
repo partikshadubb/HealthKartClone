@@ -19,4 +19,5 @@ export default {
     IMAGE_SCREEN:"imagescreen",
     GENERATOR:"generator",
     CHATS:"chats",
+    ALL_USERS:"allusers",
 }

@@ -8,6 +8,7 @@ import strings from "../../constants/lang";
 import actions from "../../redux/actions";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
+import RazorpayCheckout from 'react-native-razorpay';
 
  class Profile extends Component {
   constructor(props){
@@ -42,6 +43,10 @@ onCloseModal = () => {
   this.setState({ isModalVisible: false });
 };
 
+
+
+
+
 _renderItem = (item) => {
   const {colorId} = item.item;
   console.log(colorId, 'color id');
@@ -61,6 +66,33 @@ _renderItem = (item) => {
     </View>
   );
 };
+
+
+onPayment=() => {
+  const {themeColor}=this.props
+
+  var options = {
+    description: 'Credits towards consultation',
+    image: 'https://i.imgur.com/3g7nmJC.png',
+    currency: 'INR',
+    key: 'rzp_test_5b4HzRvci2W3FX', // Your api key
+    amount: '5000',
+    name: 'foo',
+    prefill: {
+      email: 'void@razorpay.com',
+      contact: '9191919191',
+      name: 'Razorpay Software'
+    },
+    theme: {color: themeColor}
+  }
+  RazorpayCheckout.open(options).then((data) => {
+    // handle success
+    alert(`Success: ${data.razorpay_payment_id}`);
+  }).catch((error) => {
+    // handle failure
+    alert(`Error: ${error.code} | ${error.description}`);
+  });
+}
 
   render() {
     const {themeColor}=this.props
@@ -146,6 +178,7 @@ _renderItem = (item) => {
               
             </View>
 
+<TouchableOpacity onPress={this.onPayment}>
             <View
               style={{
                 flexDirection: "row",
@@ -167,12 +200,12 @@ _renderItem = (item) => {
                      fontWeight: "bold",
                       marginLeft: 10 }}
                 >
-                  Help
+                  Payment Gateway
                 </Text>
               </View>
               
             </View>
-
+            </TouchableOpacity>
             <View
               style={{
                 flexDirection: "row",

@@ -29,5 +29,6 @@ shoppingBag:require('../assets/images/shopingBag.png'),
 consultImage:require('../assets/images/consultImage.png'),
 sentImage:require('../assets/images/sentImage.png'),
 heartImage:require('../assets/images/heartImage.png'),
-search:require('../assets/images/search.png')
+search:require('../assets/images/search.png'),
+sent:require('../assets/images/sent.png')
 }

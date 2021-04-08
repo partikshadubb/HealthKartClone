@@ -40,6 +40,7 @@
     "react-native-paper": "^4.7.2",
     "react-native-qrcode-scanner": "^1.5.3",
     "react-native-qrcode-svg": "^6.1.1",
+    "react-native-razorpay": "^2.2.4",
     "react-native-reanimated": "^2.1.0",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^2.18.1",
@@ -50,7 +51,8 @@
     "react-navigation-drawer": "^2.7.0",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "socket.io-client": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "7.13.10",
