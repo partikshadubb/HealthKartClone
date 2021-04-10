@@ -7,7 +7,7 @@ const guidelineBaseHeight = 812;
 const scale = size => (width / guidelineBaseWidth) * size;
 const verticalScale = size => (height / guidelineBaseHeight) * size;
 const moderateScale = (size, factor = 0.5) => size + (scale(size) - size) * factor;
-const moderateScaleVertical = (size, factor = 0.5) => size + (verticalScale(size) - size) * factor;
+const moderateVerticalScale = (size, factor = 0.5) => size + (verticalScale(size) - size) * factor;
 const textScale = percent => {
 	const screenHeight = Dimensions.get('window').height;
 	//calculate absolute ratio for bigger screens 18.5:9 requiring smaller scaling
@@ -23,4 +23,4 @@ const textScale = percent => {
 	return Math.round(heightPercent);
 };
 
-export { scale, verticalScale, textScale, moderateScale, moderateScaleVertical,width,height };
+export { scale, verticalScale, textScale, moderateScale, moderateVerticalScale,width,height };

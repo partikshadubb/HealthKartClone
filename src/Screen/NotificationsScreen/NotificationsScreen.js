@@ -50,19 +50,18 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     padding: 32,
-    color: '#777'
+    color: colors.darkGrey
   },
   textBold: {
     fontWeight: '500',
-    color: '#000'
+    color: colors.black
   },
   buttonText: {
     fontSize: 21,
-    color: 'rgb(0,122,255)'
+    color: colors.textBlue
   },
   buttonTouchable: {
     padding: 16
   }
 });
 
-// AppRegistry.registerComponent('default', () => NotificationsScreen);

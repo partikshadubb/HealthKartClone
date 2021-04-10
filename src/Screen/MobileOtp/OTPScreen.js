@@ -21,7 +21,7 @@ import commonStyles from '../../styles/commonStyles';
 import fontFamily from '../../styles/fontFamily';
 import {
   moderateScale,
-  moderateScaleVertical,
+  moderateVerticalScale,
 } from '../../styles/responsiveSize';
 import api from '../../redux/actions';
 import {getUserData} from '../../utils/utils';
@@ -193,7 +193,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     height: 70,
     marginTop: -10,
-    // borderBottomColor:"#ddd",
     // borderBottomWidth:2
   },
   socialRow: {
@@ -219,7 +218,7 @@ const styles = StyleSheet.create({
   socialRowBtn: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: moderateScaleVertical(40),
+    marginTop: moderateVerticalScale(40),
   },
   socialIconView: {
     flexDirection: 'row',
@@ -253,25 +252,25 @@ const styles = StyleSheet.create({
   bottomContainer: {
     // flex: 1,
     // justifyContent: 'flex-end',
-    marginBottom: moderateScaleVertical(30),
+    marginBottom: moderateVerticalScale(30),
   },
   txtSmall: {
     ...commonStyles.mediumFont14,
     lineHeight: 24,
     textAlign: 'center',
     fontFamily: fontFamily.medium,
-    marginTop: moderateScaleVertical(15),
+    marginTop: moderateVerticalScale(15),
   },
   buttonBottom: {
     marginTop: -13,
-    marginBottom: moderateScaleVertical(30),
+    marginBottom: moderateVerticalScale(30),
   },
   txtSmall1: {
     ...commonStyles.mediumFont14,
     lineHeight: 24,
     textAlign: 'center',
     fontFamily: fontFamily.medium,
-    marginTop: moderateScaleVertical(15),
+    marginTop: moderateVerticalScale(15),
     fontSize: 16,
   },
   checkBoxView: {

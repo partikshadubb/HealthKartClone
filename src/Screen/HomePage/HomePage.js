@@ -15,6 +15,8 @@ import Header from '../../Component/Header';
 import SnapCarousel from '../../Component/SnapCarousel';
 import {connect} from 'react-redux'
 import SearchBar1 from '../../Component/SearchBar1';
+import styles from '../HomePage/styles';
+import socketServices from '../../utils/socketService';
 
 
 const {dispatch} = store;
@@ -24,7 +26,7 @@ const {dispatch} = store;
     this.state = {
       counter: 0,
       addCartArray: [],
-      themeColor:"#00bfbf",
+      
       shoeList: [
         {
           id: 1,
@@ -152,6 +154,10 @@ const {dispatch} = store;
       ],
     };
   }
+  componentDidMount(){
+    const{userData}=this.props
+    socketServices.initializeSocket(userData.accessToken);
+  }
 
   // componentDidMount() {
   //   this.focusListener = this.props.navigation.addListener('focus', () => {
@@ -210,13 +216,13 @@ openDrawer = () => {
     const {themeColor}=this.props
     console.log(themeColor,"color")
     return (
-      <View style={{flex: 1,backgroundColor:colors.white}}>
+      <View style={styles.container}>
         <StatusBar bgColor={themeColor}/>
         <Header menuPress={this.openDrawer} cartPress={()=>this.props.navigation.navigate("Cart")} newColor={themeColor} />
 
 
-<View style={{backgroundColor:colors.white,paddingVertical:10}}>
-  <SearchBar1/>
+<View style={styles.searchBarView}>
+  <SearchBar1 placeholder="Search for Products, Brands and More"/>
           </View>
 <ScrollView>
 
@@ -230,7 +236,7 @@ openDrawer = () => {
 
 <SnapCarousel/>
 
-        <View style={{flex: 1}}>
+        <View>
           {<HomeStyle shoeList={shoeList} cartCounter={this.cartCounter} />}
         </View>
         </ScrollView>
@@ -244,7 +250,7 @@ openDrawer = () => {
           justifyContent: 'center',
           alignItems: 'center',
           borderRadius: 15,}}>
-          <Text style={{color: colors.white}}>{this.props.cartList.length}</Text>
+          <Text style={styles.counterText}>{this.props.cartList.length}</Text>
         </View>
       </View>
       
@@ -257,7 +263,8 @@ const mapStateToProps = state =>{
   return(
     {
     cartList : state.homeList.cartList,
-    themeColor:state.themeReducer.themeColor
+    themeColor:state.themeReducer.themeColor,
+    userData:state.auth.userData
 
     }
   )

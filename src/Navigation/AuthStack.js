@@ -61,13 +61,7 @@ function AuthStack() {
         component={HomePage}
       />
 
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={navigationStrings.DETAIL_PAGE}
-        component={DetailPage}
-      />
+      
       
      
     </React.Fragment>

@@ -38,7 +38,8 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  totalPriceText: {fontSize: 16, 
+  totalPriceText: {...commonStyles.mediumFont16,
+ 
     fontWeight: 'bold', paddingLeft: 10},
   // placeOrderText: {
   //   color: colors.white,
@@ -68,19 +69,19 @@ export default StyleSheet.create({
 textView:{backgroundColor:colors.white,
     paddingHorizontal:15,},
 productName:{
-    fontSize: 16,
+  ...commonStyles.mediumFont16,
     fontWeight: "bold",
     marginTop: 5,
     marginBottom: 5,
   },
-  productCaption:{ fontSize: 13, color: "gray" },
+  productCaption:{ ...commonStyles.mediumFont14, color: colors.grey },
   priceView:{
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     marginTop:3
   },
-productReducedPrice:{ fontSize: 14, 
+productReducedPrice:{ ...commonStyles.mediumFont14, 
     fontWeight: "bold", color:colors.black },
 productOriginalPrice:{
     fontSize: 11,

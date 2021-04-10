@@ -8,6 +8,7 @@ import Loader from '../../Component/Loader';
 import navigationStrings from '../../constants/navigationStrings';
 import actions from '../../redux/actions';
 import colors from '../../styles/colors';
+import commonStyles from '../../styles/commonStyles';
 import fontFamily from '../../styles/fontFamily';
 
 // create a component
@@ -72,7 +73,7 @@ class AllUsers extends Component {
             {isOnline ? (
               <Text
                 style={{
-                  color: 'grey',
+                  color: colors.grey,
                   paddingHorizontal: 10,
                   color: themeColor,
                 }}>
@@ -96,7 +97,7 @@ class AllUsers extends Component {
           <Text
             style={{
               fontFamily: fontFamily.bold,
-              fontSize: 20,
+              ...commonStyles.mediumFont20,
               color: themeColor,
             }}>
             Chats
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
   userName: {fontWeight: 'bold', fontSize: 17},
   subRenderView3: {marginTop: 3},
   subRenderView4: {justifyContent: 'center'},
-  userStatus: {color: 'grey', paddingHorizontal: 10},
+  userStatus: {color: colors.grey, paddingHorizontal: 10},
   headerView: {
     height: 50,
     alignItems: 'center',

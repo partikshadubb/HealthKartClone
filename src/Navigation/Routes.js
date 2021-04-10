@@ -1,9 +1,9 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack'
-import MainStack from '../Navigation/MainStack';
 import AuthStack from '../Navigation/AuthStack';
 import {connect} from 'react-redux'
+import MainStack from './MainStack';
 // import { baseProps } from 'react-native-gesture-handler/lib/typescript/handlers/gestureHandlers';
 const Stack=createStackNavigator();
 

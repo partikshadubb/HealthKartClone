@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {
   moderateScale,
-  moderateScaleVertical,
+  moderateVerticalScale,
   textScale,
 } from '../styles/responsiveSize';
 import colors from '../styles/colors';
@@ -33,12 +33,12 @@ const TextInputWithLabel = ({
 }) => {
   let currentColor = active ? colors.themeColor : colors.textGrey;
   return (
-    <View style={{marginBottom: moderateScaleVertical(15)}}>
+    <View style={{marginBottom: moderateVerticalScale(15)}}>
       <Text
         style={{
           ...commonStyles.fontSize14,
           color:color,
-          marginBottom: moderateScaleVertical(7),
+          marginBottom: moderateVerticalScale(7),
         }}>
         {label}
       </Text>
@@ -78,11 +78,11 @@ const styles = StyleSheet.create({
   textInput: {
     borderWidth: 1,
     borderColor: colors.themeMain,
-    height: moderateScaleVertical(49),
-    fontSize: moderateScaleVertical(17.5),
+    height: moderateVerticalScale(49),
+    fontSize: moderateVerticalScale(17.5),
     fontFamily: fontFamily.regular,
     paddingVertical: 0,
-    paddingHorizontal: moderateScaleVertical(16),
+    paddingHorizontal: moderateVerticalScale(16),
     textAlignVertical: 'center',
   },
 });

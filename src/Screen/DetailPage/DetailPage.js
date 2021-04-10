@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   productCaption: {
-    color: "grey",
+    color:colors.grey,
     marginLeft: 5,
   },
   productPrice: {
@@ -294,24 +294,22 @@ const styles = StyleSheet.create({
   },
   productOriginalPrice: {
     marginLeft: 10,
-    color: "gray",
+    color: colors.grey,
     textDecorationLine: "line-through",
   },
   discountPrice: {
     marginLeft: 10,
-    color: "#e0436c",
   },
   staticPart1: {
     marginLeft: 10,
     marginTop: 7,
   },
   textPart1: {
-    color: "#03a685",
     fontSize: 16,
     fontWeight: "bold",
   },
   staticPart2: {
-    backgroundColor: "white",
+    backgroundColor: colors.white,
     marginTop: 10,
     paddingLeft: 10,
     paddingBottom: 20,
@@ -327,7 +325,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   textColorPart2: {
-    color: "grey",
+    color: colors.white,
   },
   viewPart3: {
     backgroundColor: "white",
@@ -344,14 +342,13 @@ const styles = StyleSheet.create({
   offerPart3: {
     fontSize: 17,
     fontWeight: "bold",
-    color: "white",
-    backgroundColor: "#03a685",
+    color: colors.white,
     padding: 4,
   },
   textPart3: {
     fontSize: 15,
     fontWeight: "bold",
-    color: "grey",
+    color: colors.grey,
     paddingRight: 50,
   },
   part3b: {
@@ -369,7 +366,7 @@ const styles = StyleSheet.create({
   part3bText: {
     fontSize: 15,
     fontWeight: "bold",
-    color: "grey",
+    color: colors.grey,
     paddingRight: 50,
     marginTop: 15,
   },
@@ -380,7 +377,6 @@ const styles = StyleSheet.create({
   sizeChart: {
     fontSize: 15,
     fontWeight: "bold",
-    color: "#e0436c",
     paddingRight: 20,
   },
   scrollHorizontal: {
@@ -399,7 +395,6 @@ const styles = StyleSheet.create({
   viewPartText: {
     fontSize: 17,
     fontWeight: "bold",
-    color: "#e0436c",
   },
   viewPart5: {
     marginTop: 15,
@@ -434,7 +429,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderWidth: 1,
     padding: 15,
-    borderColor: "grey",
+    borderColor:colors.grey,
     borderRadius: 5,
     marginRight: 20,
     width: 130,
@@ -449,16 +444,14 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 5,
     width: 140,
-    backgroundColor: "#e0436c",
   },
   addCartText: {
-    color: "white",
+    color: colors.white,
     fontWeight: "bold",
     marginLeft: 10,
   },
   infoText: { fontSize: 16, fontWeight: "bold" },
   bottomView: { flexDirection: "row" },
-  bottomText: { color: "black", fontWeight: "bold" },
-  bottomText2: { color: "#e0436c", fontWeight: "bold" },
-  bottomViewMore: { color: "#e0436c" },
+  bottomText: { color: colors.black, fontWeight: "bold" },
+  bottomText2: {  fontWeight: "bold" },
 });

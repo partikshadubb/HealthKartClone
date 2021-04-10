@@ -6,7 +6,7 @@ import colors from '../styles/colors';
 import {
   textScale,
   moderateScale,
-  moderateScaleVertical,
+  moderateVerticalScale,
 } from '../styles/responsiveSize';
 import imagePath from '../constants/imagePath';
 import {useNavigation} from '@react-navigation/native';
@@ -73,7 +73,7 @@ const HeaderWithFilters = ({
 export default HeaderWithFilters;
 const styles = StyleSheet.create({
   headerStyle: {
-    padding: moderateScaleVertical(16),
+    padding: moderateVerticalScale(16),
   },
 
   textStyle: {

@@ -3,7 +3,7 @@ import {View, Text, Image, TextInput} from 'react-native';
 import imagePath from '../constants/imagePath';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
-import {moderateScale, moderateScaleVertical} from '../styles/responsiveSize';
+import {moderateScale, moderateVerticalScale} from '../styles/responsiveSize';
 
 export default function SearchBar({containerStyle = {}, placeholder = ''}) {
   return (
@@ -11,7 +11,7 @@ export default function SearchBar({containerStyle = {}, placeholder = ''}) {
       style={{
         flexDirection: 'row',
         paddingHorizontal: moderateScale(16),
-        height: moderateScaleVertical(38),
+        height: moderateVerticalScale(38),
         backgroundColor: colors.white,
         alignItems: 'center',
         borderWidth:1,

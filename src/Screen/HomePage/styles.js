@@ -3,7 +3,7 @@ import colors from '../../styles/colors';
 import commonStyles from '../../styles/commonStyles';
 import fontFamily from '../../styles/fontFamily';
 import {
-  moderateScaleVertical,
+  moderateVerticalScale,
   moderateScale,
 } from '../../styles/responsiveSize';
 
@@ -57,4 +57,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         borderRadius: 15,
       },
+      counterText:{color: colors.white},
+      container:{flex: 1,backgroundColor:colors.white},
+      searchBarView:{backgroundColor:colors.white,paddingVertical:10},
 });

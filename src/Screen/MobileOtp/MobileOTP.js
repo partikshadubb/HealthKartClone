@@ -11,7 +11,7 @@ import navigationStrings from '../../constants/navigationStrings';
 import colors from '../../styles/colors';
 import commonStyles from '../../styles/commonStyles';
 import fontFamily from '../../styles/fontFamily';
-import {moderateScale,moderateScaleVertical} from '../../styles/responsiveSize'
+import {moderateScale,moderateVerticalScale} from '../../styles/responsiveSize'
 import api from '../../redux/actions';
 import { getUserData } from '../../utils/utils';
 import {showMessage} from 'react-native-flash-message'
@@ -217,7 +217,6 @@ const styles = StyleSheet.create({
 marginHorizontal:15,
 height:70,
 marginTop:-10
-// borderBottomColor:"#ddd",
 // borderBottomWidth:2
   },
   socialRow:{
@@ -243,7 +242,7 @@ marginTop:-10
   socialRowBtn:{
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: moderateScaleVertical(40),
+    marginTop: moderateVerticalScale(40),
   },
   socialIconView:{ flexDirection: "row",marginVertical:10,paddingHorizontal:20,justifyContent:"space-between"},
 iconView:{
@@ -272,26 +271,26 @@ textGoogle:{height:30,width:30,marginRight:10},
 bottomContainer:{
   // flex: 1,
   // justifyContent: 'flex-end',
-  marginBottom: moderateScaleVertical(30),
+  marginBottom: moderateVerticalScale(30),
 },
 txtSmall: {
   ...commonStyles.mediumFont14,
   lineHeight: 24,
   textAlign: 'center',
   fontFamily: fontFamily.medium,
-  marginTop: moderateScaleVertical(15),
+  marginTop: moderateVerticalScale(15),
   
 },
 buttonBottom:{
   marginTop:-13,
-  marginBottom: moderateScaleVertical(30),
+  marginBottom: moderateVerticalScale(30),
 },
 txtSmall1: {
   ...commonStyles.mediumFont14,
   lineHeight: 24,
   textAlign: 'center',
   fontFamily: fontFamily.medium,
-  marginTop: moderateScaleVertical(15),
+  marginTop: moderateVerticalScale(15),
   fontSize:16
 },
 checkBoxView:{justifyContent:"space-between",flexDirection:"row",paddingHorizontal:18},

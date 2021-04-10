@@ -7,6 +7,7 @@ import fontFamily from '../../styles/fontFamily';
 import * as shape from 'd3-shape';
 import StatusBar from '../../Component/StatusBar';
 import { connect } from 'react-redux';
+import commonStyles from '../../styles/commonStyles';
  class Charts extends Component {
 constructor(props){
     super(props);
@@ -14,8 +15,8 @@ constructor(props){
 
 
   render() {
-      
-    const fill = 'rgb(134, 65, 244)';
+      const {themeColor}=this.props
+    const fill = colors.textBlue;
     const data = [
       50,
       10,
@@ -53,8 +54,8 @@ constructor(props){
           <StatusBar />
         
           <View style={styles.navSignup}>
-          <Text style={{fontFamily: fontFamily.bold,
-    fontSize: 20,}}>Charts</Text>
+          <Text style={{
+    ...commonStyles.mediumFont20,color:themeColor}}>Charts</Text>
         </View>
 
        <ScrollView >
@@ -79,7 +80,7 @@ constructor(props){
         <LineChart
                 style={styles.bargraph}
                 data={data}
-                svg={{ stroke: 'rgb(134, 65, 244)' }}
+                svg={{ stroke: colors.textBlue }}
                 contentInset={{ top: 20, bottom: 20 }}
             >
                 <Grid />
@@ -100,8 +101,6 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    color: colors.themeColor,
-    fontFamily: fontFamily.mainfont,
     marginVertical: 10,
     marginTop: 20,
     fontSize: 20,
@@ -123,4 +122,9 @@ const styles = StyleSheet.create({
 
 
   
-  export default Charts;
+const mapStateToProps = state => {
+  return {
+    themeColor: state.themeReducer.themeColor,
+  };
+};
+export default connect(mapStateToProps)(Charts);

@@ -17,6 +17,7 @@ export default {
   backgroundGreyB:"#E2E6E9",
   whiteOpacity22:"rgba(255,255,255,0.22)",
   blackOpacity10:"rgba(0,0,0,0.1)",
+  blackOpacity06:"rgba(0,0,0,0.6)",
   blackOpacity0:"rgba(0,0,0,0)",
   blackOpacity43:"rgba(0,0,0,0.43)",
   blackOpacity86:"rgba(0,0,0,0.86)",
@@ -31,5 +32,8 @@ export default {
    grey:"#aaa",
    darkGrey:"grey",
    red:"red",
+   blue:"blue",
+   green:"green",
+   pink:"pink"
 };
 

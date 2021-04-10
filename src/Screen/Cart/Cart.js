@@ -15,6 +15,7 @@ import colors from '../../styles/colors';
 import fontFamily from '../../styles/fontFamily';
 import strings from '../../constants/lang';
 import styles from './styles';
+import commonStyles from '../../styles/commonStyles';
 
 const {dispatch} = store;
 class Cart extends Component {
@@ -141,8 +142,9 @@ const {themeColor}=this.props
     return (
       <View style={styles.container}>
         <View style={styles.navSignup}>
-          <Text style={{fontFamily: fontFamily.bold,
-    fontSize: 20,color:themeColor}}>{strings.CART}</Text>
+          <Text style={{fontFamily: fontFamily.bold, 
+                   ...commonStyles.mediumFont20,
+                   color:themeColor}}>{strings.CART}</Text>
           <Image style={styles.arrowImage} source={imagePath.crossImage} />
         </View>
 

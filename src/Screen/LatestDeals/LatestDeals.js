@@ -10,25 +10,26 @@ import {
   RefreshControl,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Loader from '../../Component/Loader';
 import {INFINITE_LIST} from '../../config/urls';
 import strings from '../../constants/lang';
 import colors from '../../styles/colors';
 import fontFamily from '../../styles/fontFamily';
 import {apiPost} from '../../utils/utils';
- import imagePath from '../../constants/imagePath';
+import imagePath from '../../constants/imagePath';
 import SearchBar from '../../Component/SearchBar';
+import commonStyles from '../../styles/commonStyles';
 
-const Limit=5
- class LatestDeals extends Component {
+const Limit = 5;
+class LatestDeals extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
       isLoading: false,
       noMoreData: false,
-      refreshing:false,
+      refreshing: false,
     };
   }
 
@@ -36,35 +37,46 @@ const Limit=5
     this.apiCall();
   }
 
-  apiCall(onEndReachedCall=false) {
-const {data}=this.state
-console.log("apicall");
+  apiCall(onEndReachedCall = false) {
+    const {data} = this.state;
+    console.log('apicall');
     this.setState({isLoading: true});
     let Skip = onEndReachedCall ? data.length : 0;
     apiPost(INFINITE_LIST, {
       searchType: 'LEADERBOARD',
       limit: Limit,
-      skip:Skip
+      skip: Skip,
     })
       .then(res => {
         if (res.data.length == 0) {
-          this.setState({noMoreData: true, isLoading: false})
-        }
-        else{
+          this.setState({noMoreData: true, isLoading: false});
+        } else {
           if (onEndReachedCall) {
-            this.setState({data: [...data,...res.data],isLoading: false,refreshing:false}, ()=>{
-              console.log(this.state,"ffffff")
-                      });   
-          }
-          else{
-            this.setState({data: [...res.data],isLoading: false,refreshing:false, noMoreData: false}, ()=>{
-                      });
+            this.setState(
+              {
+                data: [...data, ...res.data],
+                isLoading: false,
+                refreshing: false,
+              },
+              () => {
+                console.log(this.state, 'ffffff');
+              },
+            );
+          } else {
+            this.setState(
+              {
+                data: [...res.data],
+                isLoading: false,
+                refreshing: false,
+                noMoreData: false,
+              },
+              () => {},
+            );
           }
         }
-        
       })
       .catch(err => {
-        this.setState({isLoading: true,});
+        this.setState({isLoading: true});
 
         console.log(err);
       });
@@ -72,11 +84,11 @@ console.log("apicall");
 
   renderItem = data => {
     // console.log(data.item.fullName);
-    const {themeColor}=this.props
+    const {themeColor} = this.props;
     return (
       <View style={styles.cardView}>
-                 <TouchableOpacity>
-           <View
+        <TouchableOpacity>
+          <View
             style={{
               flex: 1,
               flexDirection: 'row',
@@ -113,7 +125,12 @@ console.log("apicall");
                     </Text>
                   </View>
 
-                  <View style={{marginTop: 15, flexDirection: 'row',alignItems:"center"}}>
+                  <View
+                    style={{
+                      marginTop: 15,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}>
                     <TouchableOpacity>
                       <Image
                         style={{height: 30, width: 30}}
@@ -128,35 +145,36 @@ console.log("apicall");
                       />
                     </TouchableOpacity>
 
-
-<TouchableOpacity>
-<Text style={{paddingHorizontal:10,paddingVertical:5,borderRadius:15,
-  backgroundColor:themeColor,color:colors.white}}>More Info</Text>
-
-</TouchableOpacity>
-
+                    <TouchableOpacity>
+                      <Text
+                        style={{
+                          paddingHorizontal: 10,
+                          paddingVertical: 5,
+                          borderRadius: 15,
+                          backgroundColor: themeColor,
+                          color: colors.white,
+                        }}>
+                        More Info
+                      </Text>
+                    </TouchableOpacity>
                   </View>
                 </View>
               </View>
             </View>
           </View>
         </TouchableOpacity>
-    
-        
-
       </View>
     );
   };
 
   endReached = () => {
-    const { isLoading, noMoreData} = this.state;
-   if (isLoading || noMoreData) {
-    return;
-   }
+    const {isLoading, noMoreData} = this.state;
+    if (isLoading || noMoreData) {
+      return;
+    }
 
-   this.setState({isLoading:true})
-   this.apiCall(true)
-     
+    this.setState({isLoading: true});
+    this.apiCall(true);
   };
 
   footerItems = () => {
@@ -164,7 +182,11 @@ console.log("apicall");
     return (
       <View style={styles.footer}>
         {isLoading ? (
-          <ActivityIndicator size={'large'} color={colors.red} style={{margin: 15}} />
+          <ActivityIndicator
+            size={'large'}
+            color={colors.red}
+            style={{margin: 15}}
+          />
         ) : null}
       </View>
     );
@@ -176,37 +198,19 @@ console.log("apicall");
   };
 
   render() {
-    const {themeColor}=this.props
-    const{data,refreshing}=this.state
+    const {themeColor} = this.props;
+    const {data, refreshing} = this.state;
     return (
-      <View style={{flex: 1}}>
-        <View
-          style={{
-            flexDirection: 'row',
-            position: 'relative',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-            backgroundColor: colors.white,
-            alignItems: 'center',
-            height: 40,
-            paddingTop: 5,
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginLeft: 10,
-            }}>
+      <View style={styles.container}>
+        <View style={styles.headerView}>
+          <View style={styles.categoriesTextView}>
             <TouchableOpacity>
-              <Text style={{ fontFamily:fontFamily.bold,
-    fontSize: 20,color:themeColor}} >
+              <Text style={{...commonStyles.mediumFont20, color: themeColor}}>
                 {strings.CATEGORIES}
               </Text>
             </TouchableOpacity>
           </View>
         </View>
-
 
         <FlatList
           data={data}
@@ -216,7 +220,6 @@ console.log("apicall");
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
-              
               onRefresh={this._onRefresh}
             />
           }
@@ -226,6 +229,7 @@ console.log("apicall");
   }
 }
 const styles = StyleSheet.create({
+  container: {flex: 1},
   cardView: {
     flex: 1,
     backgroundColor: colors.white,
@@ -239,18 +243,18 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
     justifyContent: 'center',
   },
-  cardImage: {height: 210,
-    width:"100%",
-     position: 'relative', 
-     resizeMode:"cover",
-     borderRadius:10,
+  cardImage: {
+    height: 210,
+    width: '100%',
+    position: 'relative',
+    resizeMode: 'cover',
+    borderRadius: 10,
     //  borderBottomLeftRadius: 10,
     //  borderBottomRightRadius:10,
-    },
-  cardTextView: {position: 'absolute',
-   bottom: 10, marginHorizontal: 5},
+  },
+  cardTextView: {position: 'absolute', bottom: 10, marginHorizontal: 5},
   cardText: {
-    fontSize: 16,
+    ...commonStyles.mediumFont16,
     fontWeight: 'bold',
     marginTop: 5,
     marginBottom: 5,
@@ -269,15 +273,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  headerView: {
+    flexDirection: 'row',
+    position: 'relative',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    backgroundColor: colors.white,
+    alignItems: 'center',
+    height: 40,
+    paddingTop: 5,
+  },
+  categoriesTextView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 10,
+  },
 });
 
-const mapStateToProps = state =>{
-  return(
-    {
-    themeColor:state.themeReducer.themeColor
-
-    }
-  )
-}
+const mapStateToProps = state => {
+  return {
+    themeColor: state.themeReducer.themeColor,
+  };
+};
 
 export default connect(mapStateToProps)(LatestDeals);

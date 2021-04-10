@@ -9,6 +9,7 @@ import {SendButton} from 'react-native-fbsdk';
 import actions from '../../redux/actions';
 import socketServices from '../../utils/socketService';
 import {SOCKET_STRINGS} from '../../constants/socketStrings';
+import commonStyles from '../../styles/commonStyles';
 
 class Chats extends Component {
   state = {
@@ -17,8 +18,9 @@ class Chats extends Component {
 
   componentDidMount() {
     const {userData} = this.props;
+  
     this.apicall();
-    socketServices.initializeSocket(userData.accessToken);
+    socketServices.on(SOCKET_STRINGS.RECEIVED_MESSAGE, this.onReceiveMessage);
   }
 
   apicall = () => {
@@ -72,6 +74,45 @@ class Chats extends Component {
     }));
   }
 
+
+
+  onReceiveMessage = data => {
+      
+    const {
+      commonId,
+      name,
+      image,
+    } = this.props.route.params;
+
+    const message = {
+      _id: data._id,
+      text: data.text,
+      createdAt: data.createdAt,
+      user: {
+        _id: data.senderId,
+        name: name,
+        avatar: image && image[0].thumbnail,
+      },
+    };
+    // console.log(data,"----------data")
+    // console.log(commonConversationId,'the commonejoijoj');
+    //To make sure that all the messages are seen if new message comes
+
+    if (data.commonConversationId === commonId) {
+      socketServices.emit(SOCKET_STRINGS.SEEN_ALL_MESSAGES, {
+        senderId: data.senderId,
+        isRead: true,
+        recieverId: data.recieverId,
+      });
+
+      this.setState(previousState => ({
+        messages: GiftedChat.append(previousState.messages, message),
+      }));
+    }
+  };
+
+
+
   render() {
     const {themeColor, userData} = this.props;
     console.log(this.props.route.params, 'imagegge');
@@ -94,17 +135,11 @@ class Chats extends Component {
             source={{uri: image[0].original}}
           />
           <View
-            style={{
-              // backgroundC,
-
-              paddingHorizontal: 10,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
+            style={styles.nameView}>
             <Text
               style={{
                 fontFamily: fontFamily.bold,
-                fontSize: 20,
+                ...commonStyles.mediumFont20,
                 color: themeColor,
               }}>
               {name}
@@ -150,6 +185,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   chatViewImage: {height: 40, width: 40, borderRadius: 50},
+  nameView:{
+    // backgroundC,
+
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 });
 
 const mapStateToProps = state => {
