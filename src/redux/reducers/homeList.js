@@ -81,8 +81,12 @@ export default function (state=initialState,action) {
       const decrementIndex = newDecrementArray.findIndex((item) => item.id == action.payload);
       let obj1 = newDecrementArray[decrementIndex];
       
-      obj1.quantity =  obj1.quantity-1
+if(obj1.quantity == 1){
+    newDecrementArray = newDecrementArray.filter(item=>item.id !== action.payload);  
 
+}else{
+    obj1.quantity -= 1
+}
 
       for(let i = 0; i < newDecrementArray.length; i++){
           money += newDecrementArray[i].reducedPrice * newDecrementArray[i].quantity
