@@ -1,12 +1,6 @@
 import {StyleSheet} from 'react-native';
-import { color } from 'react-native-reanimated';
 import colors from '../../styles/colors';
 import commonStyles from '../../styles/commonStyles';
-import fontFamily from '../../styles/fontFamily';
-import {
-  moderateScaleVertical,
-  moderateScale,
-} from '../../styles/responsiveSize';
 
 export default StyleSheet.create({
   container: {

@@ -20,6 +20,7 @@ import {apiPost} from '../../utils/utils';
 import imagePath from '../../constants/imagePath';
 import SearchBar from '../../Component/SearchBar';
 import commonStyles from '../../styles/commonStyles';
+import styles from './styles';
 
 const Limit = 5;
 class LatestDeals extends Component {
@@ -89,58 +90,42 @@ class LatestDeals extends Component {
       <View style={styles.cardView}>
         <TouchableOpacity>
           <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              display: 'flex',
-              justifyContent: 'space-between',
-              // borderBottomWidth: 1,
-              // borderBottomColor: colors.lightGrey,
-            }}>
-            <View style={{padding: 5, flexDirection: 'row'}}>
+            style={styles.subCardview}>
+            <View style={styles.imageView}>
               <Image
-                style={{
-                  height: 150,
-                  width: 150,
-                  resizeMode: 'contain',
-                  borderRadius: 5,
-                }}
+                style={styles.cardImage}
                 source={{uri: data.item.profileImg[0].original}}
               />
               <View
-                style={{flexDirection: 'row', paddingTop: 6, marginLeft: 5}}>
+                style={styles.cardTextView}>
                 <View>
-                  <Text style={{fontWeight: 'bold', fontSize: 17}}>
-                    {' '}
+                  <Text style={styles.fullNameInCard}>
+                    
                     {data.item.fullName}
                   </Text>
-                  <View style={{marginTop: 5, width: 180}}>
+                  <View style={styles.cardMailView}>
                     <Text numberOfLines={1} style={{color: themeColor}}>
                       {data.item.email}
                     </Text>
                   </View>
-                  <View style={{marginTop: 8, width: 180}}>
-                    <Text numberOfLines={1} style={{color: colors.darkGrey}}>
+                  <View style={styles.cardBioView}>
+                    <Text numberOfLines={1} style={styles.bioInCard}>
                       {data.item.bio}
                     </Text>
                   </View>
 
                   <View
-                    style={{
-                      marginTop: 15,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    }}>
+                    style={styles.iconView}>
                     <TouchableOpacity>
                       <Image
-                        style={{height: 30, width: 30}}
+                        style={styles.cardSentImage}
                         source={imagePath.sentImage}
                       />
                     </TouchableOpacity>
 
                     <TouchableOpacity>
                       <Image
-                        style={{height: 33, width: 33, marginHorizontal: 10}}
+                        style={styles.cardHeartImage}
                         source={imagePath.heartImage}
                       />
                     </TouchableOpacity>
@@ -228,68 +213,7 @@ class LatestDeals extends Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {flex: 1},
-  cardView: {
-    flex: 1,
-    backgroundColor: colors.white,
-    borderRadius: 10,
-    margin: 8,
-    borderWidth: 1,
-    borderColor: colors.lightGrey,
-  },
-  cardImageView: {
-    backgroundColor: colors.white,
-    borderBottomLeftRadius: 10,
-    justifyContent: 'center',
-  },
-  cardImage: {
-    height: 210,
-    width: '100%',
-    position: 'relative',
-    resizeMode: 'cover',
-    borderRadius: 10,
-    //  borderBottomLeftRadius: 10,
-    //  borderBottomRightRadius:10,
-  },
-  cardTextView: {position: 'absolute', bottom: 10, marginHorizontal: 5},
-  cardText: {
-    ...commonStyles.mediumFont16,
-    fontWeight: 'bold',
-    marginTop: 5,
-    marginBottom: 5,
-    color: colors.white,
-  },
-  cardText1: {
-    fontSize: 13,
-    fontWeight: 'bold',
-    // marginTop: 5,
-    // marginBottom: 5,
-    color: colors.white,
-  },
-  footer: {
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  headerView: {
-    flexDirection: 'row',
-    position: 'relative',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    backgroundColor: colors.white,
-    alignItems: 'center',
-    height: 40,
-    paddingTop: 5,
-  },
-  categoriesTextView: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 10,
-  },
-});
+
 
 const mapStateToProps = state => {
   return {

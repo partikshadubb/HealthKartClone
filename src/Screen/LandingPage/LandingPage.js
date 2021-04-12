@@ -24,6 +24,7 @@ import navigationStrings from '../../constants/navigationStrings';
 import strings from '../../constants/lang';
 import { connect } from 'react-redux';
 import commonStyles from '../../styles/commonStyles';
+import styles from './styles';
 // import { Pagination } from 'react-native-snap-carousel';
 
 const{width,height} =Dimensions.get("screen")
@@ -64,15 +65,7 @@ const{width,height} =Dimensions.get("screen")
               dotsLength={carouselItems.length}
               activeDotIndex={activeIndex}
             //   containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.75)' }}
-              dotStyle={{
-                  width: 10,
-                  height: 10,
-                  borderRadius: 5,
-                  marginHorizontal: 8,
-                  backgroundColor: colors.white,
-                  
-        
-              }}
+              dotStyle={styles.paginationDot}
               inactiveDotStyle={{
                   // Define styles for inactive dots here
               }}
@@ -85,26 +78,12 @@ const{width,height} =Dimensions.get("screen")
 
     _renderItem({item}){
         return (
-          <View style={{
-              // backgroundColor:'red',
-              borderRadius: 5,
-              height: 300,
-              width:'100%',
-              alignItems:"center",
-              justifyContent:"center",
-              marginVertical:130
-            //   marginLeft: 25,
-            //   marginRight: 25,
-               }}>
+          <View style={styles.renderImageView}>
             
-            <Image style={{resizeMode:"cover",
-            height:300,width:300}}
+            <Image style={styles.renderImage}
              source={item.image}/>
-         <View style={{padding:15,width:290,
-        
-         justifyContent:"center",}}>
-         <Text style={{color:colors.white,
-          fontSize:25,textAlign:"center"}}>
+         <View style={styles.renderTextView}>
+         <Text style={styles.renderText}>
             {item.text}
             </Text>
           </View>
@@ -187,7 +166,8 @@ borderRadius:10,
 paddingHorizontal:50,
 paddingVertical:13,
 borderRadius:10,
-...commonStyles.mediumFont16}}>
+...commonStyles.mediumFont16,
+}}>
                     {strings.LOGIN}
                   </Text>
 </View>
@@ -200,36 +180,7 @@ borderRadius:10,
     }
 }
 }
-const styles = StyleSheet.create({
-  container:{flex:1},
-  image: {
-    flex: 1,
-    resizeMode: "contain",
-    
-  },
- buttonView:{
-  flex: 1,
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  marginTop:500,
-  marginHorizontal:15
-},
-// signUpText:{color:colors.themeColor,
-//   backgroundColor:colors.white,
-//   alignSelf:"center",
-// paddingHorizontal:50,
-// paddingVertical:13,
-// borderRadius:10,
-// fontFamily:fontFamily.bold,fontSize:17},
-// getStarted:{color:colors.themeColor,
-//   backgroundColor:colors.white,
-//   alignSelf:"center",
-//   paddingHorizontal:110,
-//   paddingVertical:13,
-//   borderRadius:10,
-//   fontFamily:fontFamily.bold,fontSize:17},
 
-});
 const mapStateToProps = state =>{
   return(
     {
