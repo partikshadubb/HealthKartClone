@@ -30,10 +30,10 @@ export default {
   lightGreyBg:"#e8e8e8",
   lightGrey:"#ddd",
    grey:"#aaa",
-   darkGrey:"grey",
-   red:"red",
-   blue:"blue",
-   green:"green",
-   pink:"pink"
+   darkGrey:"#aaa",
+   red:"#FF0000",
+   blue:"#0000FF",
+   green:"#008000",
+   pink:"#FFC0CB"
 };
 

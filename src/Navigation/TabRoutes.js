@@ -7,6 +7,7 @@ import colors from '../styles/colors';
 import {color} from 'react-native-reanimated';
 import imagePath from '../constants/imagePath';
 import { connect } from 'react-redux';
+import strings from '../constants/lang';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,10 +19,10 @@ function TabRoutes(props) {
         activeTintColor: themeColor ,
       }}>
       <Tab.Screen
-        name="Home"
+        name={navigationStrings.HOMEPAGE}
         component={HomePage}
         options={{
-          tabBarLabel: 'Shop',
+          tabBarLabel:strings.SHOP,
           tabBarIcon: ({focused}) => {
             return (
               <Image
@@ -33,10 +34,10 @@ function TabRoutes(props) {
         }}
       />
       <Tab.Screen
-        name="Latest Deals"
+        name={navigationStrings.LATEST_DEALS}
         component={LatestDeals}
         options={{
-          tabBarLabel: 'Consult',
+          tabBarLabel:strings.CONSULT,
           tabBarIcon: ({focused}) => {
             return (
               <Image
@@ -49,10 +50,10 @@ function TabRoutes(props) {
       />
 
 <Tab.Screen
-        name="Search"
+        name={navigationStrings.SEARCH}
         component={Search}
         options={{
-          tabBarLabel: 'Search',
+          tabBarLabel:strings.SEARCH,
           tabBarIcon: ({focused}) => {
             return (
               <Image
@@ -66,10 +67,10 @@ function TabRoutes(props) {
 
 
       <Tab.Screen
-        name="Cart"
+        name={navigationStrings.CART}
         component={Cart}
         options={{
-          tabBarLabel: 'Cart',
+          tabBarLabel:strings.CART,
           tabBarIcon: ({focused}) => {
             return (
               <Image
@@ -81,10 +82,10 @@ function TabRoutes(props) {
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name={navigationStrings.POFILE}
         component={Profile}
         options={{
-          tabBarLabel: 'Profile',
+          tabBarLabel:strings.PROFILE,
           tabBarIcon: ({focused}) => {
             return (
               <Image

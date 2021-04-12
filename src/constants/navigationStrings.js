@@ -20,4 +20,6 @@ export default {
     GENERATOR:"generator",
     CHATS:"chats",
     ALL_USERS:"allusers",
+    LATEST_DEALS:"latestDeals",
+    POFILE:"profile",
 }

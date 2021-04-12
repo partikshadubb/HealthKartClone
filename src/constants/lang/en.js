@@ -64,4 +64,8 @@ export default {
     TERMS_AND_CONDITIONS:"Terms & Conditions",
     VERIFY_NUMBER:"VERIFY NUMBER",
     SEARCH:"Search",
+    CART:"Cart",
+    PROFILE:"Profile",
+    CONSULT:"Consult",
+    SHOP:"Shop"
 }

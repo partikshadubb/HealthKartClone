@@ -17,6 +17,9 @@ import {connect} from 'react-redux'
 import SearchBar1 from '../../Component/SearchBar1';
 import styles from '../HomePage/styles';
 import socketServices from '../../utils/socketService';
+import {navigate  } from "../../Navigation/NavigationService";
+
+import navigationStrings from '../../constants/navigationStrings';
 
 
 const {dispatch} = store;
@@ -218,7 +221,8 @@ openDrawer = () => {
     return (
       <View style={styles.container}>
         <StatusBar bgColor={themeColor}/>
-        <Header menuPress={this.openDrawer} cartPress={()=>this.props.navigation.navigate("Cart")} newColor={themeColor} />
+        <Header menuPress={this.openDrawer} cartPress={()=>navigate(navigationStrings.CART)
+} newColor={themeColor} />
 
 
 <View style={styles.searchBarView}>

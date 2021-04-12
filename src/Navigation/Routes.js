@@ -4,16 +4,16 @@ import {createStackNavigator} from '@react-navigation/stack'
 import AuthStack from '../Navigation/AuthStack';
 import {connect} from 'react-redux'
 import MainStack from './MainStack';
+import { navigationRef } from './NavigationService';
 // import { baseProps } from 'react-native-gesture-handler/lib/typescript/handlers/gestureHandlers';
 const Stack=createStackNavigator();
-
 
  function Routes(props){
  const {userData}=props
  console.log(props.userData.accessToken,"in routes")
 
     return(
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
             <Stack.Navigator>
         {!!userData.accessToken?MainStack():AuthStack()}
                 
