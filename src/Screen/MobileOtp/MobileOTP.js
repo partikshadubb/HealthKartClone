@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { View, Text, StyleSheet,Image,TouchableOpacity, Platform } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import { BorderlessButton, ScrollView } from 'react-native-gesture-handler';
@@ -25,30 +25,32 @@ import { connect } from 'react-redux';
 
 
 // create a component
-class MobileOTP extends Component {
+function MobileOTP(props) {
   
-  constructor(props){
-    super(props);
-    this.state={
+
+  
+  
+  const [state,setState]=useState({
       userEmail:"",
       password:"",
       phoneNumber:"",
       otp:"",
       userId:"",
       isLoading:false,
-    }
-       }
+    })
+    const updateState = data => setState(preState =>({...preState,...data}) );
 
 
-       onAddText(key) {
+
+     const  onAddText=(key)=>{
  
             return (value) => {
-              this.setState({ [key]: value });
+              updateState({ [key]: value });
             };
           }
         
-            isValidData = () => {
-              const {phoneNumber,userId}=this.state
+           const isValidData = () => {
+              const {phoneNumber,userId}=state
             const error=validator({ phoneNumber:phoneNumber}) 
            if (error) { 
              showMessage({
@@ -59,7 +61,7 @@ class MobileOTP extends Component {
              return false;
             } 
         
-          this.setState({isLoading:true})
+          updateState({isLoading:true})
             api.mobileOtpVerification({ 
                 
                 contactDetails:
@@ -70,13 +72,12 @@ class MobileOTP extends Component {
             }
             )
           .then((res)=>{
-            this.setState({isLoading:false})
-            // const {userId}=this.state
-           let newuserId = res.data.userId
-        
-            this.setState({userId:newuserId})
-            console.log(userId,"otp")
-this.props.navigation.navigate(navigationStrings.OTP_SCREEN,{userId:this.state.userId})
+            updateState({isLoading:false})
+           
+            console.log(res.data.userId,"inotpscreen")
+
+           props.navigation.navigate(navigationStrings.OTP_SCREEN,
+        {userId:res.data.userId})
 
           })
           .catch((error) => {
@@ -92,9 +93,9 @@ this.props.navigation.navigate(navigationStrings.OTP_SCREEN,{userId:this.state.u
 
 
 
-  render() {
-    const {isLoading}=this.state
-    const {themeColor}=this.props
+  
+    const {isLoading}=state
+    const {themeColor}=props
     return (
      
       <View style={styles.container}>
@@ -113,8 +114,9 @@ this.props.navigation.navigate(navigationStrings.OTP_SCREEN,{userId:this.state.u
          
 
         <View style={{paddingHorizontal:15,marginTop:15}}>
-        <TextInputWithLabel  onChangeText={this.onAddText("phoneNumber")}
-           label={strings.YOUR_PHONE_NUMBER} color={themeColor} borderColor={themeColor} placeholder={strings.YOUR_PHONE_NUMBER}/>
+        <TextInputWithLabel  onChangeText={onAddText("phoneNumber")}
+           label={strings.YOUR_PHONE_NUMBER} color={themeColor}
+            borderColor={themeColor} placeholder={strings.YOUR_PHONE_NUMBER}/>
 
         </View>
 
@@ -125,7 +127,9 @@ this.props.navigation.navigate(navigationStrings.OTP_SCREEN,{userId:this.state.u
 
         
 <View style={styles.buttonView}>
-  <ButtonWithLoader btnText={strings.VERIFY_NUMBER} btnTextStyle={20} btnStyle={styles.buttonStyle} bgColor={themeColor} onPress={()=>this.isValidData()}/>
+  <ButtonWithLoader btnText={strings.VERIFY_NUMBER}
+   btnTextStyle={20} btnStyle={styles.buttonStyle} 
+   bgColor={themeColor} onPress={isValidData}/>
 </View>
 
 
@@ -167,7 +171,7 @@ this.props.navigation.navigate(navigationStrings.OTP_SCREEN,{userId:this.state.u
           <Text style={{...styles.txtSmall1, color: colors.textGreyLight}}>
            {strings.NEW_TO_HEALTHKART}
             <Text
-             onPress={()=>this.props.navigation.navigate(navigationStrings.SIGNUP)}
+             onPress={()=>props.navigation.navigate(navigationStrings.SIGNUP)}
               style={{
                 color: themeColor,
                 fontFamily: fontFamily.futuraBtHeavy,
@@ -185,7 +189,7 @@ this.props.navigation.navigate(navigationStrings.OTP_SCREEN,{userId:this.state.u
      
     );
   }
-}
+
 
 // define your styles
 const styles = StyleSheet.create({

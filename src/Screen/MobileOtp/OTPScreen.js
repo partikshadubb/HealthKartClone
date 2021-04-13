@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {
   View,
   Text,
@@ -33,30 +33,31 @@ import { connect } from 'react-redux';
 // import MobileOTP from '../MobileOtp/MobileOTP';
 
 // create a component
-class OTPScreen extends Component {
-  constructor(props) {
-    
-    super(props);
-    this.state = {
-      userId: '',
+function OTPScreen(props) {
+  
+console.log(props.route.params,"asdfghjkl");
+   const[state,setState] =useState( {
+     
       otp: '',
-    };
+    });
     //   const {userId}=props.route.params
-  }
+  
+    const updateState = data => setState(preState =>({...preState,...data}) );
 
-  onAddText(key) {
+    
+ const onAddText =(key)=>{
     return value => {
-      this.setState({[key]: value});
+      updateState({[key]: value});
     };
   }
 
-  isValidOtp = () => {
+ const isValidOtp = () => {
     
-    const {otp, userId} = this.state;
-    console.log(this.props,'opppppppppp')
+    const {otp} = state;
+    console.log(props,'opppppppppp')
     api
       .otpVerification({
-        userId: this.props.route.params.userId,
+        userId:props.route.params.userId,
         otp,
         deviceToken: '123',
         registerFrom: Platform.OS.toUpperCase(),
@@ -72,14 +73,15 @@ class OTPScreen extends Component {
       .catch(error => {
         console.log(error);
       });
-    this.props.navigation.navigate(navigationStrings.TAB_ROUTES);
+    props.navigation.navigate(navigationStrings.TAB_ROUTES);
     return true;
   };
 
-  render() {
 
-    const {themeColor}=this.props
+
+    const {themeColor}=props
     return (
+      
       <View style={styles.container}>
         <StatusBar bgColor={themeColor}/>
 
@@ -96,7 +98,7 @@ class OTPScreen extends Component {
               position: 'relative',
             }}>
             <TextInputWithLabel
-              onChangeText={this.onAddText('otp')}
+              onChangeText={onAddText('otp')}
               label={strings.ENTER_OTP}
               placeholder="enter OTP."
               color={themeColor}
@@ -108,7 +110,7 @@ class OTPScreen extends Component {
             <ButtonWithLoader
               btnText={strings.LOGIN}
               btnTextStyle={20}
-              onPress={ this.isValidOtp}
+              onPress={isValidOtp}
               bgColor={themeColor}
               btnStyle={styles.buttonStyle}
             />
@@ -148,7 +150,7 @@ class OTPScreen extends Component {
              {strings.NEW_TO_HEALTHKART}
               <Text
                 onPress={() =>
-                  this.props.navigation.navigate(navigationStrings.SIGNUP)
+                  props.navigation.navigate(navigationStrings.SIGNUP)
                 }
                 style={{
                   color: themeColor,
@@ -161,8 +163,8 @@ class OTPScreen extends Component {
         </ScrollView>
       </View>
     );
-  }
-}
+  
+              }
 
 // define your styles
 const styles = StyleSheet.create({
