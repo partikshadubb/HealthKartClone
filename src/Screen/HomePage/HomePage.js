@@ -210,7 +210,8 @@ changeTheme=()=>{
 }
 openDrawer = () => {
   const { navigation } = this.props;
-  navigation.openDrawer();
+  console.log(navigation,"ggg")
+   navigation.openDrawer();
 }
 
   render() {
@@ -221,8 +222,7 @@ openDrawer = () => {
     return (
       <View style={styles.container}>
         <StatusBar bgColor={themeColor}/>
-        <Header menuPress={this.openDrawer} cartPress={()=>navigate(navigationStrings.CART)
-} newColor={themeColor} />
+        <Header menuPress={this.openDrawer}  newColor={themeColor} />
 
 
 <View style={styles.searchBarView}>

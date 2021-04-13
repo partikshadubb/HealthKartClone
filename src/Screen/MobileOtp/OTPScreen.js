@@ -35,6 +35,7 @@ import { connect } from 'react-redux';
 // create a component
 class OTPScreen extends Component {
   constructor(props) {
+    
     super(props);
     this.state = {
       userId: '',
@@ -50,8 +51,9 @@ class OTPScreen extends Component {
   }
 
   isValidOtp = () => {
+    
     const {otp, userId} = this.state;
-
+    console.log(this.props,'opppppppppp')
     api
       .otpVerification({
         userId: this.props.route.params.userId,
@@ -70,7 +72,7 @@ class OTPScreen extends Component {
       .catch(error => {
         console.log(error);
       });
-    this.props.navigation.navigate(navigationStrings.HOMEPAGE);
+    this.props.navigation.navigate(navigationStrings.TAB_ROUTES);
     return true;
   };
 
@@ -106,7 +108,7 @@ class OTPScreen extends Component {
             <ButtonWithLoader
               btnText={strings.LOGIN}
               btnTextStyle={20}
-              onPress={() => this.isValidOtp()}
+              onPress={ this.isValidOtp}
               bgColor={themeColor}
               btnStyle={styles.buttonStyle}
             />

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {
   View,
   Text,
@@ -37,25 +37,27 @@ import {
 GoogleSignin.configure();
 
 // create a component
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  function Login(props) {
+   
+ 
+  
+    const [state,setState] = useState({
       userEmail: '',
       password: '',
       isChecked:false,
       showPwd:false,
-    };
-  }
+    });
+  
+const updateState = data => setState(preState =>({...preState,...data}) );
 
-  onAddText(key) {
+ const onAddText=(key)=> {
     return value => {
-      this.setState({[key]: value});
+      updateState({[key]: value});
     };
   }
 
-  isValidData = () => {
-    const {userEmail, password} = this.state;
+  const isValidData = () => {
+    const {userEmail, password} = state;
     const error = validator({email: userEmail, password: password});
     if (error) {
       showMessage({
@@ -74,7 +76,7 @@ class Login extends Component {
           message: 'Login Successfully',
           type: 'success',
         });
-        this.props.navigation.navigate(navigationStrings.HOMEPAGE);
+        props.navigation.navigate(navigationStrings.HOMEPAGE);
       })
       .catch(error => {
         console.log(error);
@@ -82,7 +84,7 @@ class Login extends Component {
     return true;
   };
 
-  facebookLogin = () => {
+  const facebookLogin = () => {
     LoginManager.logInWithPermissions(['public_profile']).then(
       login => {
         if (login.isCancelled) {
@@ -92,7 +94,7 @@ class Login extends Component {
             const accessToken = data.accessToken.toString();
             console.log(accessToken, 'facebook');
             // this.getInfoFromToken(accessToken);
-            this.props.navigation.navigate(navigationStrings.TAB_ROUTES);
+            props.navigation.navigate(navigationStrings.TAB_ROUTES);
           });
         }
       },
@@ -101,17 +103,17 @@ class Login extends Component {
       },
     );
   };
-showLoginPwd=()=>{
+const showLoginPwd=()=>{
   
-  this.setState({ isChecked:!this.state.isChecked});
+  updateState({ isChecked:!state.isChecked});
 
 }
 
-signIn = async () => {
+const signIn = async () => {
   try {
     await GoogleSignin.hasPlayServices();
     const userInfo = await GoogleSignin.signIn();
-    this.setState({ userInfo });
+    updateState({ userInfo });
     alert(JSON.stringify(userInfo))
   } catch (error) {
     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -127,9 +129,9 @@ signIn = async () => {
 };
 
 
-  render() {
-    const {themeColor} = this.props;
-    const{isChecked}=this.state
+ 
+    const {themeColor} = props;
+    const{isChecked}=state
     return (
       <View style={styles.container}>
         <StatusBar bgColor={themeColor} />
@@ -154,7 +156,7 @@ signIn = async () => {
 
           <View style={{paddingHorizontal: 15, marginTop: 15}}>
             <TextInputWithLabel
-              onChangeText={this.onAddText('userEmail')}
+              onChangeText={onAddText('userEmail')}
               label={strings.ENTER_EMAIL}
               color={themeColor}
               borderColor={themeColor}
@@ -164,7 +166,7 @@ signIn = async () => {
 
           <View style={{paddingHorizontal: 15}}>
             <TextInputWithLabel
-              onChangeText={this.onAddText('password')}
+              onChangeText={onAddText('password')}
               label={strings.ENTER_PASSWORD}
               color={themeColor}
               borderColor={themeColor}
@@ -175,7 +177,7 @@ signIn = async () => {
 
           <TouchableOpacity
             onPress={() =>
-              this.props.navigation.navigate(navigationStrings.MOBILEOTP)
+              props.navigation.navigate(navigationStrings.MOBILEOTP)
             }
             style={{
               backgroundColor: themeColor,
@@ -193,8 +195,8 @@ signIn = async () => {
           <CheckBox
     style={{flex: 1,}}
     
-    onClick={this.showLoginPwd}
-    isChecked={this.state.isChecked}
+    onClick={showLoginPwd}
+    isChecked={state.isChecked}
     rightText="show password"
    
 />
@@ -208,7 +210,7 @@ signIn = async () => {
               bgColor={themeColor}
               btnText={strings.LOGIN}
               btnTextStyle={20}
-              onPress={() => this.isValidData()}
+              onPress={isValidData}
             />
           </View>
 
@@ -236,7 +238,7 @@ signIn = async () => {
           <View style={{flexDirection: 'row'}}></View>
 
           <View style={styles.socialIconView}>
-            <TouchableOpacity onPress={this.facebookLogin}>
+            <TouchableOpacity onPress={facebookLogin}>
               <View style={styles.iconView}>
                 <Image
                   style={styles.textFacebook}
@@ -245,7 +247,7 @@ signIn = async () => {
                 <Text>{strings.FACEBOOK}</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity  onPress={this.signIn}>
+            <TouchableOpacity  onPress={signIn}>
               <View style={styles.iconView2}>
                 <Image
                   style={styles.textGoogle}
@@ -261,7 +263,7 @@ signIn = async () => {
               {strings.NEW_TO_HEALTHKART}
               <Text
                 onPress={() =>
-                  this.props.navigation.navigate(navigationStrings.SIGNUP)
+                  props.navigation.navigate(navigationStrings.SIGNUP)
                 }
                 style={{
                   color: themeColor,
@@ -285,7 +287,7 @@ signIn = async () => {
       </View>
     );
   }
-}
+
 
 
 

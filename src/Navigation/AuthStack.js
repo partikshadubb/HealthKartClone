@@ -12,6 +12,7 @@ import {
   OTPScreen,
 } from "../Screen";
 import navigationStrings from "../constants/navigationStrings";
+import TabRoutes from "./TabRoutes";
 const Stack = createStackNavigator();
 
 function AuthStack() {
@@ -57,8 +58,8 @@ function AuthStack() {
         options={{
           headerShown: false,
         }}
-        name={navigationStrings.HOMEPAGE}
-        component={HomePage}
+        name={navigationStrings.TAB_ROUTES}
+        component={TabRoutes}
       />
 
       
