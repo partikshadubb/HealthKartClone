@@ -29,6 +29,12 @@ import {connect} from 'react-redux';
 // import MobileOTP from '../MobileOtp/MobileOTP';
 import {AccessToken, LoginManager} from 'react-native-fbsdk';
 import styles from './styles';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+GoogleSignin.configure();
 
 // create a component
 class Login extends Component {
@@ -100,6 +106,25 @@ showLoginPwd=()=>{
   this.setState({ isChecked:!this.state.isChecked});
 
 }
+
+signIn = async () => {
+  try {
+    await GoogleSignin.hasPlayServices();
+    const userInfo = await GoogleSignin.signIn();
+    this.setState({ userInfo });
+    alert(JSON.stringify(userInfo))
+  } catch (error) {
+    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+      // user cancelled the login flow
+    } else if (error.code === statusCodes.IN_PROGRESS) {
+      // operation (e.g. sign in) is in progress already
+    } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+      // play services not available or outdated
+    } else {
+      // some other error happened
+    }
+  }
+};
 
 
   render() {
@@ -220,7 +245,7 @@ showLoginPwd=()=>{
                 <Text>{strings.FACEBOOK}</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity  onPress={this.signIn}>
               <View style={styles.iconView2}>
                 <Image
                   style={styles.textGoogle}
@@ -246,7 +271,15 @@ showLoginPwd=()=>{
               </Text>
             </Text>
           </View>
-          <View></View>
+          <View>
+          {/* <GoogleSigninButton
+    style={{ width: 192, height: 48 }}
+    size={GoogleSigninButton.Size.Wide}
+    color={GoogleSigninButton.Color.Dark}
+    onPress={this.signIn}
+    disabled={this.state.isSigninInProgress} /> */}
+
+          </View>
          
         </ScrollView>
       </View>
